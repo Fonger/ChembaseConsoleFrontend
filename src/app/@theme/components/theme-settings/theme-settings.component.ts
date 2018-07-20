@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { StateService } from '../../../@core/data/state.service';
 
 @Component({
-  selector: 'ngx-theme-settings',
+  selector: 'chem-theme-settings',
   styleUrls: ['./theme-settings.component.scss'],
   template: `
     <h6>LAYOUTS</h6>
@@ -27,7 +27,7 @@ import { StateService } from '../../../@core/data/state.service';
       </a>
     </div>
     <div class="switcher">
-      <ngx-layout-direction-switcher [vertical]="true"></ngx-layout-direction-switcher>
+      <chem-layout-direction-switcher [vertical]="true"></chem-layout-direction-switcher>
     </div>
   `,
 })

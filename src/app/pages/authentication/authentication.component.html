@@ -1,0 +1,121 @@
+
+<div class="row">
+    <div class="col-md-12">
+      <nb-card>
+        <nb-tabset>
+          <nb-tab tabTitle="Users">
+            <span>User List...</span>
+          </nb-tab>
+          <nb-tab tabTitle="EMAIL">
+            <form (submit)="onSubmit(beakerForm)" #beakerForm="ngForm">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Enable</label>
+                <div class="col-sm-10">
+                  <nb-checkbox>Enable Email Authentication</nb-checkbox>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="emailSenderInput" class="col-sm-2 col-form-label">Sender Email</label>
+                <div class="col-sm-10">
+                  <input ngModel class="form-control" id="emailSenderInput" name="emailSender" placeholder="no-reply@example.com" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="smtpHostInput" class="col-sm-2 col-form-label">SMTP Host</label>
+                <div class="col-sm-10">
+                  <input ngModel class="form-control" id="smtpHostInput" name="smtpHost" placeholder="smtp.example.com" required>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <label for="smtpPortInput" class="col-sm-2 col-form-label">SMTP Port</label>
+                  <div class="col-sm-10">
+                    <input ngModel class="form-control" id="smtpPortInput" name="smtpPort" placeholder="587" required>
+                  </div>
+                </div>
+              <div class="form-group row">
+                <label for="smtpUserInput" class="col-sm-2 col-form-label">SMTP User</label>
+                <div class="col-sm-10">
+                  <input ngModel class="form-control" id="smtpUserInput" name="smtpUser" placeholder="Username">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="smtpPassInput" class="col-sm-2 col-form-label">SMTP Password</label>
+                <div class="col-sm-10">
+                  <input ngModel type="password" class="form-control" id="smtpPassInput" name="smtpPass" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="smtpSecureInput" class="col-sm-2 col-form-label">SMTP Secure Mode</label>
+                <div class="col-sm-10">
+                  <select ngModel class="form-control" id="smtpSecureInput" name="smtpSecure" placeholder="">
+                    <option value="STARTTLS">STARTTLS</option>
+                    <option value="SSL">SSL</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                  <div class="offset-sm-2 col-sm-10">
+                      <nb-checkbox>Trust invalid certificate</nb-checkbox>
+                  </div>
+                </div>
+              <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </nb-tab>
+          <nb-tab tabTitle="LDAP">
+              <form (submit)="onSubmit(beakerForm)" #beakerForm="ngForm">
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Enable</label>
+                    <div class="col-sm-10">
+                      <nb-checkbox>Enable LDAP Authentication</nb-checkbox>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="ldapServerInput" class="col-sm-2 col-form-label">LDAP Server</label>
+                    <div class="col-sm-10">
+                      <input ngModel class="form-control" id="ldapServerInput" name="ldapServer" placeholder="ldaps://ldap.example.com" required>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="ldapSearchBaseInput" class="col-sm-2 col-form-label">LDAP Search Base</label>
+                      <div class="col-sm-10">
+                        <input ngModel class="form-control" id="ldapSearchBaseInput" name="ldapSearchBase" placeholder="ou=People,dc=example,dc=com" required>
+                      </div>
+                    </div>
+                  <div class="form-group row">
+                    <label for="ldapSearchFilterInput" class="col-sm-2 col-form-label">LDAP Search Filter</label>
+                    <div class="col-sm-10">
+                      <input ngModel class="form-control" id="ldapSearchFilterInput" name="ldapSearchFilter" placeholder="(uid={{'{{username}' + '}'}})">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="ldapGroupSearchBaseInput" class="col-sm-2 col-form-label">LDAP Group Search Base</label>
+                      <div class="col-sm-10">
+                        <input ngModel class="form-control" id="ldapGroupSearchBaseInput" name="ldapGroupSearchBase" placeholder="ou=Group,dc=example,dc=com" required>
+                      </div>
+                    </div>
+                  <div class="form-group row">
+                    <label for="ldapGroupSearchFilterInput" class="col-sm-2 col-form-label">LDAP Group Search Filter</label>
+                    <div class="col-sm-10">
+                      <input ngModel class="form-control" id="ldapGroupSearchFilterInput" name="ldapGroupSearchFilter" placeholder="(|(&(cn=*)(memberUid={{'{{user.uid}'+'}'}}))(&(cn=*)(gidNumber={{'{{user.gidNumber}'+'}'}})))">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <nb-checkbox>Trust invalid certificate</nb-checkbox>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                  </div>
+                </form>
+          </nb-tab>
+        </nb-tabset>
+      </nb-card>
+    </div>
+  </div>

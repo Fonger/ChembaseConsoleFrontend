@@ -104,13 +104,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "ngx",
+      "chem",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "ngx",
+      "chem",
       "kebab-case"
     ],
     "ban": [

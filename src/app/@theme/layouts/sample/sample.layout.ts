@@ -13,23 +13,18 @@ import { StateService } from '../../../@core/data/state.service';
 
 // TODO: move layouts into the framework
 @Component({
-  selector: 'ngx-sample-layout',
+  selector: 'chem-sample-layout',
   styleUrls: ['./sample.layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
-        <ngx-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></ngx-header>
+        <chem-header [position]="sidebar.id === 'start' ? 'normal': 'inverse'"></chem-header>
       </nb-layout-header>
 
       <nb-sidebar class="menu-sidebar"
                    tag="menu-sidebar"
                    responsive
                    [end]="sidebar.id === 'end'">
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>Support Us</span>
-          </a>
-        </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
 
@@ -46,7 +41,7 @@ import { StateService } from '../../../@core/data/state.service';
       </nb-layout-column>
 
       <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
+        <chem-footer></chem-footer>
       </nb-layout-footer>
 
       <nb-sidebar class="settings-sidebar"
@@ -54,7 +49,7 @@ import { StateService } from '../../../@core/data/state.service';
                    state="collapsed"
                    fixed
                    [end]="sidebar.id !== 'end'">
-        <ngx-theme-settings></ngx-theme-settings>
+        <chem-theme-settings></chem-theme-settings>
       </nb-sidebar>
     </nb-layout>
   `,

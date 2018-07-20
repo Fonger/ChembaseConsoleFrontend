@@ -3,9 +3,9 @@ import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile';
 
 @Component({
-  selector: 'ngx-layout-direction-switcher',
+  selector: 'chem-layout-direction-switcher',
   template: `
-    <ngx-switcher
+    <chem-switcher
       [firstValue]="directions.RTL"
       [secondValue]="directions.LTR"
       [firstValueLabel]="'RTL'"
@@ -14,7 +14,7 @@ import { takeWhile } from 'rxjs/operators/takeWhile';
       (valueChange)="toggleDirection($event)"
       [vertical]="vertical"
     >
-    </ngx-switcher>
+    </chem-switcher>
   `,
 })
 export class LayoutDirectionSwitcherComponent implements OnDestroy {

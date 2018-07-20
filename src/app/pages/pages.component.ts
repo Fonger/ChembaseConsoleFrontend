@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
+import { NbMenuItem } from '@nebular/theme';
 
 import { MENU_ITEMS } from './pages-menu';
 
 @Component({
-  selector: 'ngx-pages',
+  selector: 'chem-pages',
   template: `
-    <ngx-sample-layout>
+    <chem-sample-layout>
       <nb-menu [items]="menu"></nb-menu>
       <router-outlet></router-outlet>
-    </ngx-sample-layout>
+    </chem-sample-layout>
   `,
 })
 export class PagesComponent {
+  menu: NbMenuItem[]
 
-  menu = MENU_ITEMS;
+  constructor() {
+    this.menu = MENU_ITEMS;
+  }
 }

@@ -1,0 +1,59 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/core/mixins';
+@import '~@nebular/theme/styles/core/functions';
+
+.bsoneditor-root {
+  padding-bottom: 5px;
+}
+:host {
+  /deep/ {
+    .bsoneditor {
+      border: 1px solid #888888;
+    }
+    .bsoneditor-menu {
+      /*display: none;*/
+      background-color: #888888;
+      border-bottom: 1px solid #888888;
+      padding-left: 0 !important;
+    }
+
+    div.bsoneditor-contextmenu {
+      .bsoneditor-expand, .bsoneditor-separator {
+        border-color: #444444 !important;
+      }
+    }
+    div.bsoneditor-tree {
+      height: inherit;
+      [type=checkbox] {
+        width: 13px;
+        height: 13px;
+        padding: 0;
+        margin:0;
+        vertical-align: bottom;
+        position: relative;
+        top: -1px;
+        overflow: hidden;
+      }
+    }
+    table {
+      border-spacing: 0;
+    }
+    div.bsoneditor-tree table.bsoneditor-tree {
+      margin: 0;
+    }
+    div.bsoneditor-contextmenu ul li button.bsoneditor-selected,
+    div.bsoneditor-contextmenu ul li button.bsoneditor-selected:hover,
+    div.bsoneditor-contextmenu ul li button.bsoneditor-selected:focus {
+      background-color: #444444;
+    }
+    .bsoneditor-mode-view {
+      width: 100%;
+      height: 100% !important;
+    }
+    .bsoneditor-mode-tree {
+      width: 100%;
+      height: 100% !important;
+    }
+  }
+}
+

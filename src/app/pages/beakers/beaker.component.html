@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12">
+    <!--nb-card>
+      <nb-card-body>
+        <input ngModel class="form-control" placeholder="where('x').eq('5').limit(20)" required>
+      </nb-card-body>
+    </nb-card -->
+    <nb-card>
+      <nb-card-body>
+        <div *ngFor="let data of mockdata">
+          <chem-bson-editor [data]="data" (onSave)="onCompoundSave($event)" (onRemove)="onCompoundRemove($event)">
+
+          </chem-bson-editor>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+

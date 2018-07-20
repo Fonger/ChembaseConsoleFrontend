@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'ngx-tree',
+  selector: 'chem-tree',
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
 })

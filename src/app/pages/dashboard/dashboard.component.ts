@@ -9,7 +9,7 @@ interface CardSettings {
 }
 
 @Component({
-  selector: 'ngx-dashboard',
+  selector: 'chem-dashboard',
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnDestroy {

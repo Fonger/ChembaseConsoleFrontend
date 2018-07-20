@@ -47,10 +47,6 @@
 
     margin-top: nb-theme(sidebar-header-gap);
 
-    @include nb-for-theme(corporate) {
-      margin-top: 0;
-    }
-
     /deep/ .main-container {
       height:
         calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;
@@ -65,12 +61,12 @@
     }
 
     /deep/ .scrollable {
-      @include nb-for-theme(corporate) {
-        padding-top: 0;
-
-        .menu-item:first-child {
-          border-top: none;
-        }
+      padding-top: 0;
+      @include nb-for-theme(cosmic) {
+        padding-top: 0.5rem;
+      }
+      .menu-item:first-child {
+        border-top: none;
       }
     }
 

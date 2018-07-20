@@ -31,6 +31,9 @@ import {
   ThemeSwitcherComponent,
   ThemeSwitcherListComponent,
 } from './components';
+
+import { LabSwitcherComponent } from '../pages/components/lab-switcher/lab-switcher.component';
+
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import {
   OneColumnLayoutComponent,
@@ -74,6 +77,7 @@ const COMPONENTS = [
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
+  LabSwitcherComponent,
 ];
 
 const ENTRY_COMPONENTS = [
@@ -90,7 +94,7 @@ const PIPES = [
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'cosmic',
+      name: 'corporate',
     },
     [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
   ).providers,

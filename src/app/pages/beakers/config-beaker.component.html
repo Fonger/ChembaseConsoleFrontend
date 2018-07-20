@@ -1,0 +1,55 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-tabset>
+        <nb-tab tabTitle="ACL Rule">
+          <form (submit)="onSubmit(beakerForm)" #beakerForm="ngForm">
+            <div class="form-group row">
+              <label for="listRuleInput" class="col-sm-2 col-form-label">List</label>
+              <div class="col-sm-10">
+                <input ngModel class="form-control" id="listRuleInput" name="listRule" placeholder="" required>
+              </div>
+            </div>
+            <div class="form-group row">
+                <label for="getRuleInput" class="col-sm-2 col-form-label">Get</label>
+                <div class="col-sm-10">
+                  <input ngModel class="form-control" id="getRuleInput" name="getRule" placeholder="" required>
+                </div>
+              </div>
+            <div class="form-group row">
+              <label for="createRuleInput" class="col-sm-2 col-form-label">Create</label>
+              <div class="col-sm-10">
+                <input ngModel class="form-control" id="createRuleInput" name="createRule" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="updateRuleInput" class="col-sm-2 col-form-label">Update</label>
+              <div class="col-sm-10">
+                <input ngModel class="form-control" id="updateRuleInput" name="updateRule" placeholder="">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="deleteRuleInput" class="col-sm-2 col-form-label">Delete</label>
+              <div class="col-sm-10">
+                <input ngModel class="form-control" id="deleteRuleInput" name="deleteRule" placeholder="">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="offset-sm-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </form>
+        </nb-tab>
+        <nb-tab tabTitle="Index">
+          <span>Content #2</span>
+        </nb-tab>
+        <nb-tab tabTitle="Statistics">
+          <span>Content #3</span>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card>
+  </div>
+</div>
