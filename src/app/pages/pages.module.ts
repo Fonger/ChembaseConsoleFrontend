@@ -9,6 +9,7 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { CreateBeakerModule } from './beakers/create-beaker.module';
 import { ConfigBeakerModule } from './beakers/config-beaker.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { ShellModule } from './shell/shell.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -22,6 +23,7 @@ const PAGES_COMPONENTS = [
     BeakerModule,
     CreateBeakerModule,
     ConfigBeakerModule,
+    ShellModule,
     AuthenticationModule,
     MiscellaneousModule,
   ],

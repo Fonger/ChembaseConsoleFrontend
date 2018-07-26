@@ -41,6 +41,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/auth',
   },
   {
+    title: 'Shell',
+    icon: 'ion-ios-monitor',
+    link: '/pages/shell',
+  },
+  {
     title: 'DOCS',
     group: true,
   },

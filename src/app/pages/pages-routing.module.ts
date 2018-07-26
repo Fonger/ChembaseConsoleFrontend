@@ -7,6 +7,7 @@ import { CreateBeakerComponent } from './beakers/create-beaker.component';
 import { ConfigBeakerComponent } from './beakers/config-beaker.component';
 import { BeakerComponent } from './beakers/beaker.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { ShellComponent } from './shell/shell.component';
 
 const routes: Routes = [{
   path: '',
@@ -31,6 +32,10 @@ const routes: Routes = [{
     {
       path: 'auth',
       component: AuthenticationComponent,
+    },
+    {
+      path: 'shell',
+      component: ShellComponent,
     },
     {
       path: '',
