@@ -22,7 +22,7 @@ const routes: Routes = [{
       component: CreateBeakerComponent,
     },
     {
-      path: 'beakers/:beakerId',
+      path: 'beakers/:beakerId/data',
       component: BeakerComponent,
     },
     {

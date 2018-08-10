@@ -1,6 +1,6 @@
 <div class="dropdown lab-switcher" ngbDropdown>
   <button class="btn btn-primary" type="button" ngbDropdownToggle>
-    <i class="nb-grid-a-outline"></i><span>{{ selectedLab.id }}</span>
+    <i class="nb-grid-a-outline"></i><span>{{ selectedLab ? selectedLab.id : 'Loading...' }}</span>
   </button>
   <ul class="dropdown-menu" ngbDropdownMenu>
     <li class="dropdown-item" *ngFor="let lab of labs" (click)="selectLab(lab)">{{ lab.id }}</li>

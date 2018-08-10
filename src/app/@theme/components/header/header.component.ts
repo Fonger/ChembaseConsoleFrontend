@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { NbMenuService, NbSidebarService } from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
+import { NbMenuService, NbSidebarService, NbMenuItem } from '@nebular/theme';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
+import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 
 @Component({
   selector: 'chem-header',
@@ -16,17 +16,29 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu: NbMenuItem[] = [
+    {
+      title: 'Log out',
+      link: '/auth/logout',
+    },
+  ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
+              private authService: NbAuthService,
               private analyticsService: AnalyticsService) {
+
+    this.authService.onTokenChange()
+    .subscribe((token: NbAuthJWTToken) => {
+      if (token.isValid()) {
+        this.user = token.getPayload();
+      }
+    })
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.fonger);
+    // this.userService.getUsers()
+    //   .subscribe((users: any) => this.user = users.fonger);
   }
 
   toggleSidebar(): boolean {

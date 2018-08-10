@@ -1,55 +1,62 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
-import { of as observableOf } from 'rxjs';
-
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators/map';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 
-const socialLinks = [
-  {
-    url: 'https://github.com/akveo/nebular',
-    target: '_blank',
-    icon: 'socicon-github',
-  },
-  {
-    url: 'https://www.facebook.com/akveo/',
-    target: '_blank',
-    icon: 'socicon-facebook',
-  },
-  {
-    url: 'https://twitter.com/akveo_inc',
-    target: '_blank',
-    icon: 'socicon-twitter',
-  },
-];
-
+@Injectable()
 export class NbSimpleRoleProvider extends NbRoleProvider {
-  getRole() {
-    // here you could provide any role based on any auth flow
-    return observableOf('guest');
+  constructor(private authService: NbAuthService) {
+    super();
+  }
+  getRole(): Observable<string> {
+    return this.authService.onTokenChange()
+      .pipe(
+        map((token: NbAuthJWTToken) => {
+          return token.isValid() ? token.getPayload()['role'] : 'guest';
+        }),
+      );
   }
 }
 
 export const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   ...NbAuthModule.forRoot({
-
     strategies: [
-      NbDummyAuthStrategy.setup({
+      NbPasswordAuthStrategy.setup({
         name: 'email',
-        delay: 3000,
+        token: {
+          class: NbAuthJWTToken,
+          key: 'token',
+        },
+        baseEndpoint: 'http://localhost:8080/api/v1/admin',
+        login: {
+          endpoint: '/auth/sign-in',
+          method: 'post',
+        },
+        register: {
+          endpoint: '/auth/sign-up',
+          method: 'post',
+        },
+        logout: {
+          endpoint: '/auth/sign-out',
+          method: 'post',
+        },
+        requestPass: {
+          endpoint: '/auth/request-pass',
+          method: 'post',
+        },
+        resetPass: {
+          endpoint: '/auth/reset-pass',
+          method: 'post',
+        },
       }),
     ],
     forms: {
-      login: {
-        socialLinks: socialLinks,
-      },
-      register: {
-        socialLinks: socialLinks,
-      },
     },
   }).providers,
 

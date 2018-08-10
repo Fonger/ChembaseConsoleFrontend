@@ -52,7 +52,7 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     termFit(this.term)
     this.term.focus()
 
-    this.socket = io('http://localhost:3000', {
+    this.socket = io('http://localhost:8080/admin', {
       autoConnect: false,
       transports: ['websocket'],
       upgrade: false,

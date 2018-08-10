@@ -1,14 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LabService } from '../../../@core/data/lab.service';
+import { Lab } from '../../../@core/data/lab';
 
 @Component({
   selector: 'chem-lab-switcher',
   templateUrl: './lab-switcher.component.html',
   styleUrls: ['./lab-switcher.component.scss'],
 })
-export class LabSwitcherComponent {
-  labs = [{ id: 'lab1'}, { id: 'lab2'}, { id: 'lab3'}]
-  selectedLab = this.labs[0]
+export class LabSwitcherComponent implements OnInit {
+  constructor(private labService: LabService) {
+    this.labs = []
+  }
+
+  labs: Lab[];
+  selectedLab?: Lab;
+
+  ngOnInit() {
+    this.labService.getLabs().subscribe(labs => {
+      this.labs = labs;
+      if (labs[0]) {
+        this.selectLab(labs[0])
+      }
+    })
+  }
   selectLab(lab) {
-    this.selectedLab = lab
+    this.labService.setSelectedLab(lab).then(newLab => this.selectedLab = newLab)
   }
 }

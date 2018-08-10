@@ -14,36 +14,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Beakers',
     icon: 'ion-beaker',
-    link: '/pages/beakers',
-    children: [
-      {
-        title: 'beaker1',
-        children: [
-          {
-            title: 'Data',
-            link: '/pages/beakers/beaker1',
-          },
-          {
-            title: 'ACL Rule & Index',
-            link: '/pages/beakers/beaker1/config',
-          },
-        ],
-      },
-      {
-        title: 'Create Beaker',
-        link: '/pages/createbeaker',
-      },
-    ],
+    children: [],
   },
   {
     title: 'Authentication',
     icon: 'ion-person-stalker',
     link: '/pages/auth',
+    hidden: true,
   },
   {
     title: 'Shell',
     icon: 'ion-ios-monitor',
     link: '/pages/shell',
+    hidden: true,
   },
   {
     title: 'DOCS',
