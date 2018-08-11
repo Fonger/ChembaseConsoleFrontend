@@ -38,11 +38,12 @@ export interface EmailAuth {
     user?: string,
     pass?: string,
     secureMethod?: 'STARTTLS' | 'SSL',
-    trustInvalidCertificate?: boolean,
+    tlsMode?: 'DEFAULT' | 'PINNED' | 'IGNORE';
+    ca?: string;
   };
   template?: {
     verify: {
-      subject: string
+      subject: string,
       content: string,
     },
     reset: {
@@ -58,5 +59,8 @@ export interface LdapAuth {
   searchFilter?: string;
   groupSearchBase?: string;
   groupSearchFilter?: string;
-  trustInvalidCertificate?: string;
+  bindDN?: string;
+  bindPass?: string;
+  tlsMode?: 'DEFAULT' | 'PINNED' | 'IGNORE';
+  ca?: string;
 }

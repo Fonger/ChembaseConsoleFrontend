@@ -87,6 +87,10 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     if (this.socket) {
       this.socket.disconnect()
     }
-    this.term.dispose()
+    try {
+      this.term.dispose()
+    } catch (err) {
+
+    }
   }
 }

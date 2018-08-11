@@ -60,10 +60,21 @@
                 </div>
               </div>
               <div class="form-group row">
-                  <div class="offset-sm-2 col-sm-10">
-                      <nb-checkbox [disabled]="!emailAuth.enabled" [(value)]="emailAuth.smtp.trustInvalidCertificate" name="trustSmtpCert">Trust invalid certificate</nb-checkbox>
-                  </div>
+                <label for="emailTlsModeInput" class="col-sm-2 col-form-label">TLS Mode</label>
+                <div class="col-sm-10">
+                  <select nbInput [disabled]="!emailAuth.enabled" [(ngModel)]="emailAuth.smtp.tlsMode" class="form-control" id="emailTlsModeInput" name="emailTlsMode" placeholder="">
+                    <option value="DEFAULT">Default (Verify Valid Certificate)</option>
+                    <option value="PINNED">Pinned Self-Signed Certificate</option>
+                    <option value="IGNORE">Ignore Invalid Certificate (Insecure)</option>
+                  </select>
                 </div>
+              </div>
+              <div class="form-group row" *ngIf="emailAuth.smtp.tlsMode === 'PINNED'">
+                <label for="emailCAInput" class="col-sm-2 col-form-label">Certificate</label>
+                <div class="col-sm-10">
+                  <textarea [disabled]="!emailAuth.enabled" [(ngModel)]="emailAuth.smtp.ca" class="form-control" placeholder="-----BEGIN CERTIFICATE-----" id="ldapCAInput" name="ldapCA"></textarea>
+                </div>
+              </div>
               <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
                   <button type="submit" class="btn btn-primary">Save</button>
@@ -72,54 +83,77 @@
             </form>
           </nb-tab>
           <nb-tab tabTitle="LDAP">
-              <form (submit)="onSubmitLdap($event)" *ngIf="ldapAuth">
-                  <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Enable</label>
+            <form (submit)="onSubmitLdap($event)" *ngIf="ldapAuth">
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Enable</label>
+                  <div class="col-sm-10">
+                    <nb-checkbox [(ngModel)]="ldapAuth.enabled" #email="ngModel" name="ldapEnabled">Enable LDAP Authentication</nb-checkbox>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ldapServerInput" class="col-sm-2 col-form-label">Server</label>
+                  <div class="col-sm-10">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.url" class="form-control" id="ldapServerInput" name="ldapServer" placeholder="ldaps://ldap.example.com" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ldapSearchBaseInput" class="col-sm-2 col-form-label">Search Base</label>
+                  <div class="col-sm-10">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.searchBase" class="form-control" id="ldapSearchBaseInput" name="ldapSearchBase" placeholder="ou=People,dc=example,dc=com" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ldapSearchFilterInput" class="col-sm-2 col-form-label">Search Filter</label>
+                  <div class="col-sm-10">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.searchFilter" class="form-control" id="ldapSearchFilterInput" name="ldapSearchFilter" placeholder="(uid={{'{{username}' + '}'}})">
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ldapGroupSearchBaseInput" class="col-sm-2 col-form-label">Group Search Base</label>
                     <div class="col-sm-10">
-                      <nb-checkbox [(ngModel)]="ldapAuth.enabled" #email="ngModel" name="ldapEnabled">Enable LDAP Authentication</nb-checkbox>
+                      <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.groupSearchBase" class="form-control" id="ldapGroupSearchBaseInput" name="ldapGroupSearchBase" placeholder="ou=Group,dc=example,dc=com" required>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="ldapServerInput" class="col-sm-2 col-form-label">LDAP Server</label>
-                    <div class="col-sm-10">
-                      <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.url" class="form-control" id="ldapServerInput" name="ldapServer" placeholder="ldaps://ldap.example.com" required>
-                    </div>
+                <div class="form-group row">
+                  <label for="ldapGroupSearchFilterInput" class="col-sm-2 col-form-label">Group Search Filter</label>
+                  <div class="col-sm-10">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.groupSearchFilter" class="form-control" id="ldapGroupSearchFilterInput" name="ldapGroupSearchFilter" placeholder="(|(&(cn=*)(uid={{'{{user.uid}'+'}'}}))(&(cn=*)(gidNumber={{'{{user.gidNumber}'+'}'}})))">
                   </div>
-                  <div class="form-group row">
-                      <label for="ldapSearchBaseInput" class="col-sm-2 col-form-label">LDAP Search Base</label>
-                      <div class="col-sm-10">
-                        <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.searchBase" class="form-control" id="ldapSearchBaseInput" name="ldapSearchBase" placeholder="ou=People,dc=example,dc=com" required>
-                      </div>
-                    </div>
-                  <div class="form-group row">
-                    <label for="ldapSearchFilterInput" class="col-sm-2 col-form-label">LDAP Search Filter</label>
-                    <div class="col-sm-10">
-                      <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.searchFilter" class="form-control" id="ldapSearchFilterInput" name="ldapSearchFilter" placeholder="(uid={{'{{username}' + '}'}})">
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ldapBindDNInput" class="col-sm-2 col-form-label">Bind DN</label>
+                  <div class="col-sm-10">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.bindDN" class="form-control" id="ldapBindDNInput" name="ldapBindDN" placeholder="uid=admin,ou=People,dc=example,dc=com">
                   </div>
-                  <div class="form-group row">
-                      <label for="ldapGroupSearchBaseInput" class="col-sm-2 col-form-label">LDAP Group Search Base</label>
-                      <div class="col-sm-10">
-                        <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.groupSearchBase" class="form-control" id="ldapGroupSearchBaseInput" name="ldapGroupSearchBase" placeholder="ou=Group,dc=example,dc=com" required>
-                      </div>
-                    </div>
-                  <div class="form-group row">
-                    <label for="ldapGroupSearchFilterInput" class="col-sm-2 col-form-label">LDAP Group Search Filter</label>
-                    <div class="col-sm-10">
-                      <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.groupSearchFilter" class="form-control" id="ldapGroupSearchFilterInput" name="ldapGroupSearchFilter" placeholder="(|(&(cn=*)(memberUid={{'{{user.uid}'+'}'}}))(&(cn=*)(gidNumber={{'{{user.gidNumber}'+'}'}})))">
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ldapBindPassInput" class="col-sm-2 col-form-label">Bind Password</label>
+                  <div class="col-sm-10">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.bindPass" class="form-control" id="ldapBindPassInput" name="ldapBindPass" placeholder="admin password">
                   </div>
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                        <nb-checkbox [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.trustInvalidCertificate" name="trustLdapCert">Trust invalid certificate</nb-checkbox>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ldapTlsModeInput" class="col-sm-2 col-form-label">TLS Mode</label>
+                  <div class="col-sm-10">
+                    <select nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.tlsMode" class="form-control" id="ldapTlsModeInput" name="ldapTlsMode" placeholder="">
+                      <option value="DEFAULT">Default (Verify Valid Certificate)</option>
+                      <option value="PINNED">Pinned Self-Signed Certificate</option>
+                      <option value="IGNORE">Ignore Invalid Certificate (Insecure)</option>
+                    </select>
                   </div>
-                  <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                      <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
+                </div>
+                <div class="form-group row" *ngIf="ldapAuth.tlsMode === 'PINNED'">
+                  <label for="ldapCAInput" class="col-sm-2 col-form-label">Certificate</label>
+                  <div class="col-sm-10">
+                    <textarea [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.ca" class="form-control" placeholder="-----BEGIN CERTIFICATE-----" id="ldapCAInput" name="ldapCA"></textarea>
                   </div>
-                </form>
+                </div>
+                <div class="form-group row">
+                  <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+              </form>
           </nb-tab>
         </nb-tabset>
       </nb-card>
