@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lab } from './lab';
 
+export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
 
 @Injectable()
 export class LabService {
   constructor(private http: HttpClient) {}
-  public selectedLab = new BehaviorSubject<Lab>(null);
+  private selectedLab = new BehaviorSubject<Lab>(null);
 
   getLabs(): Observable<Lab[]> {
     return this.http.get<Lab[]>('http://localhost:8080/api/v1/admin/labs')
@@ -25,4 +26,15 @@ export class LabService {
     })
   }
 
+  onSelectedLab(): Observable<Lab> {
+    return this.selectedLab.asObservable()
+  }
+
+  refreshSelectedLab(lab: Lab) {
+    this.selectedLab.next(lab)
+  }
+
+  updateLab(labId: string, content: DeepPartial<Lab>): Observable<Lab> {
+    return this.http.patch<Lab>(`http://localhost:8080/api/v1/admin/labs/${labId}`, content)
+  }
 }

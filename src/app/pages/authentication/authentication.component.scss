@@ -9,6 +9,9 @@
     flex-direction: column;
   }
 
+  [disabled] {
+    opacity: 0.5;
+  }
   nb-tab {
     padding: nb-theme(padding);
   }

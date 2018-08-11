@@ -21,7 +21,7 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.labService.selectedLab.subscribe(lab => {
+    this.labService.onSelectedLab().subscribe(lab => {
       if (!lab) return
       this.menu[2].children = lab.beakers.map(beaker => {
         return {
