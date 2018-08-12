@@ -4,7 +4,13 @@
       <nb-card>
         <nb-tabset>
           <nb-tab tabTitle="Users">
-            <span>User List...</span>
+            <ng2-smart-table
+              [settings]="settings"
+              [source]="labUsers"
+              (createConfirm)="onCreateUser($event)"
+              (editConfirm)="onEditUser($event)"
+              (deleteConfirm)="onDeleteUser($event)">
+            </ng2-smart-table>
           </nb-tab>
           <nb-tab tabTitle="EMAIL" *ngIf="emailAuth">
             <form (submit)="onSubmitEmail($event)">
@@ -63,14 +69,14 @@
                 <label for="emailTlsModeInput" class="col-sm-2 col-form-label">TLS Mode</label>
                 <div class="col-sm-10">
                   <select nbInput [disabled]="!emailAuth.enabled" [(ngModel)]="emailAuth.smtp.tlsMode" class="form-control" id="emailTlsModeInput" name="emailTlsMode" placeholder="">
-                    <option value="DEFAULT">Default (Verify Valid Certificate)</option>
+                    <option value="DEFAULT">Default</option>
                     <option value="PINNED">Pinned Self-Signed Certificate</option>
                     <option value="IGNORE">Ignore Invalid Certificate (Insecure)</option>
                   </select>
                 </div>
               </div>
               <div class="form-group row" *ngIf="emailAuth.smtp.tlsMode === 'PINNED'">
-                <label for="emailCAInput" class="col-sm-2 col-form-label">Certificate</label>
+                <label for="emailCAInput" class="col-sm-2 col-form-label">Public Certificate</label>
                 <div class="col-sm-10">
                   <textarea [disabled]="!emailAuth.enabled" [(ngModel)]="emailAuth.smtp.ca" class="form-control" placeholder="-----BEGIN CERTIFICATE-----" id="ldapCAInput" name="ldapCA"></textarea>
                 </div>
@@ -129,21 +135,21 @@
                 <div class="form-group row">
                   <label for="ldapBindPassInput" class="col-sm-2 col-form-label">Bind Password</label>
                   <div class="col-sm-10">
-                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.bindPass" class="form-control" id="ldapBindPassInput" name="ldapBindPass" placeholder="admin password">
+                    <input nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.bindPass" class="form-control" id="ldapBindPassInput" name="ldapBindPass" type="password" placeholder="admin password">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="ldapTlsModeInput" class="col-sm-2 col-form-label">TLS Mode</label>
                   <div class="col-sm-10">
                     <select nbInput [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.tlsMode" class="form-control" id="ldapTlsModeInput" name="ldapTlsMode" placeholder="">
-                      <option value="DEFAULT">Default (Verify Valid Certificate)</option>
+                      <option value="DEFAULT">Default</option>
                       <option value="PINNED">Pinned Self-Signed Certificate</option>
                       <option value="IGNORE">Ignore Invalid Certificate (Insecure)</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row" *ngIf="ldapAuth.tlsMode === 'PINNED'">
-                  <label for="ldapCAInput" class="col-sm-2 col-form-label">Certificate</label>
+                  <label for="ldapCAInput" class="col-sm-2 col-form-label">Public Certificate</label>
                   <div class="col-sm-10">
                     <textarea [disabled]="!ldapAuth.enabled" [(ngModel)]="ldapAuth.ca" class="form-control" placeholder="-----BEGIN CERTIFICATE-----" id="ldapCAInput" name="ldapCA"></textarea>
                   </div>

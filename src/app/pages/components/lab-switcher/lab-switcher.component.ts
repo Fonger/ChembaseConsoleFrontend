@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LabService } from '../../../@core/data/lab.service';
+import { LabService, DeepPartial } from '../../../@core/data/lab.service';
 import { Lab } from '../../../@core/data/lab';
 
 @Component({
@@ -12,7 +12,7 @@ export class LabSwitcherComponent implements OnInit {
     this.labs = []
   }
 
-  labs: Lab[];
+  labs: DeepPartial<Lab[]>;
   selectedLab?: Lab;
 
   ngOnInit() {

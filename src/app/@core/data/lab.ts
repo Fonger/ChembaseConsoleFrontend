@@ -64,3 +64,14 @@ export interface LdapAuth {
   tlsMode?: 'DEFAULT' | 'PINNED' | 'IGNORE';
   ca?: string;
 }
+
+export interface LabUser {
+  _id: string;
+  method: 'email' | 'ldap';
+  email?: string;
+  password?: string;
+  username?: string;
+  verified?: boolean;
+  verifyCode?: string
+  info?: any
+}

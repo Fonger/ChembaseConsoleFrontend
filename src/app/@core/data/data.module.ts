@@ -5,11 +5,13 @@ import { UserService } from './users.service';
 import { StateService } from './state.service';
 import { LabService } from './lab.service';
 import { TokenInterceptor } from '../utils/token.interceptor';
+import { BeakerService } from './beaker.service';
 
 const SERVICES = [
   UserService,
   StateService,
   LabService,
+  BeakerService,
 ];
 
 @NgModule({

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { mockdata } from './mockbeakerdata';
+import { BeakerService } from '../../@core/data/beaker.service';
+import { LabService } from '../../@core/data/lab.service';
+import { Beaker } from '../../@core/data/beaker';
 
 @Component({
   selector: 'chem-beaker',
@@ -8,12 +11,22 @@ import { mockdata } from './mockbeakerdata';
   templateUrl: './beaker.component.html',
 })
 export class BeakerComponent implements OnInit {
-  beakerId: string
-  mockdata: any[]
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private labService: LabService,
+    private beakerService: BeakerService,
+  ) {}
+
+  private mockdata = []
+  private beaker?: Beaker
   ngOnInit() {
-    this.beakerId = this.route.snapshot.params.beakerId;
-    this.mockdata = mockdata;
+    this.mockdata = mockdata
+    const beakerId = this.route.snapshot.paramMap.get('beakerId')
+    this.labService.onSelectedLab().subscribe(lab => {
+      this.beakerService.getBeaker(lab.id, beakerId).subscribe(beaker => {
+        this.beaker = beaker
+      })
+    })
   }
   onCompoundSave($event) {
     if ($event.error) throw $event.error
