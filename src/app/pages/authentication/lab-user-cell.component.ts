@@ -12,32 +12,6 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LabUserIdEditorComponent extends DefaultEditor {}
 
-@Component({
-  template: `
-  <a href="#" *ngIf="showInfoBtn" (click)="showInfo($event)"><i class="nb-info"></i> {{ldapUserName}}</a>
-  `,
-})
-export class LdapUserNameRenderComponent implements ViewCell, OnInit {
-  ldapUserName: string;
-  showInfoBtn: boolean;
-  @Input() value: string;
-  @Input() rowData: LabUser;
-
-  constructor(private modalService: NgbModal) {}
-
-  ngOnInit() {
-    this.ldapUserName = this.value.toString();
-    this.showInfoBtn = this.value && this.ldapUserName !== ''
-  }
-
-  showInfo($event: Event) {
-    event.preventDefault()
-    const modalRef = this.modalService.open(LdapModalContentComponent, { size: 'lg', container: 'nb-layout' })
-    modalRef.componentInstance.title = `LDAP User: ${this.ldapUserName}`;
-    modalRef.componentInstance.value = this.rowData.info;
-  }
-
-}
 
 @Component({
   selector: 'chem-ldap-modal-content',
@@ -92,3 +66,32 @@ export class LdapModalContentComponent {
 
   constructor(public activeModal: NgbActiveModal) {}
 }
+
+@Component({
+  template: `
+  <a href="#" *ngIf="showInfoBtn" (click)="showInfo($event)"><i class="nb-info"></i> {{ldapUserName}}</a>
+  `,
+})
+export class LdapUserNameRenderComponent implements ViewCell, OnInit {
+  ldapUserName: string;
+  showInfoBtn: boolean;
+  @Input() value: string;
+  @Input() rowData: LabUser;
+
+  constructor(private modalService: NgbModal) {}
+
+  ngOnInit() {
+    this.ldapUserName = this.value.toString();
+    this.showInfoBtn = this.value && this.ldapUserName !== ''
+  }
+
+  showInfo($event: Event) {
+    event.preventDefault()
+    const modalRef = this.modalService.open(LdapModalContentComponent, { size: 'lg', container: 'nb-layout' })
+    modalRef.componentInstance.title = `LDAP User: ${this.ldapUserName}`;
+    modalRef.componentInstance.value = this.rowData.info;
+  }
+
+}
+
+

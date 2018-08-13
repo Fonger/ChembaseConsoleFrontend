@@ -279,7 +279,7 @@ export const mockdata = [{
     'recoverTime': 14400,
   },
   'paid': true,
-  'arrData': Array.apply(null, {length: 20}).map(o => Math.random()),
+  'arrData': Array.apply(null, {length: 20}).map(() => Math.random()),
   'qqq': { a: true, b: false},
   'empty': null,
   'unlimited': true,
