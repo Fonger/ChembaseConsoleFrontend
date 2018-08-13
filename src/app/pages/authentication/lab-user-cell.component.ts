@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DefaultEditor, ViewCell } from 'ng2-smart-table';
 import { LabUser } from '../../@core/data/lab';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';

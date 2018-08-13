@@ -16,14 +16,13 @@ export class BeakerComponent implements OnInit {
     private labService: LabService,
     private beakerService: BeakerService,
   ) {}
-
+  protected beaker?: Beaker
   private mockdata = []
-  private beaker?: Beaker
   ngOnInit() {
     this.mockdata = mockdata
     const beakerId = this.route.snapshot.paramMap.get('beakerId')
     this.labService.onSelectedLab().subscribe(lab => {
-      this.beakerService.getBeaker(lab.id, beakerId).subscribe(beaker => {
+      this.beakerService.getBeaker(lab, beakerId).subscribe(beaker => {
         this.beaker = beaker
       })
     })
