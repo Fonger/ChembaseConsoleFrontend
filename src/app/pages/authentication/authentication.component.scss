@@ -2,6 +2,22 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
+/deep/ {
+  nb-card.popover-card {
+    margin-bottom: 0;
+    width: 300px;
+    box-shadow: none;
+  }
+  pre {
+    margin-bottom: 0;
+  }
+  pre.non-object {
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+}
+
 @include nb-install-component() {
   nb-tabset {
     height: 100%;
@@ -13,16 +29,17 @@
     opacity: 0.5;
   }
 
-  /deep/ select {
-    height: unset !important;
+  /deep/ {
+    select {
+      height: unset !important;
+    }
+    chem-tab1, chem-tab2 {
+      display: block;
+      padding: nb-theme(padding);
+    }
   }
 
   nb-tab {
-    padding: nb-theme(padding);
-  }
-
-  /deep/ chem-tab1, /deep/ chem-tab2 {
-    display: block;
     padding: nb-theme(padding);
   }
 

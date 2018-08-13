@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LabService } from '../../@core/data/lab.service';
 import { EmailAuth, LdapAuth, Lab, LabUser } from '../../@core/data/lab';
-import { LocalDataSource, DefaultEditor } from 'ng2-smart-table';
 
 import * as cloneDeep from 'clone-deep';
-import { Deferred, nextTick } from 'q';
+import { Deferred } from 'q';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
-import { Observable, of } from 'rxjs';
 import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component';
 
 @Component({

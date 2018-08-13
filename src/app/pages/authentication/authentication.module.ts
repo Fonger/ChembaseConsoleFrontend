@@ -3,7 +3,7 @@ import { Ng2SmartTableModule, DefaultEditor } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AuthenticationComponent } from './authentication.component';
 import { FormsModule } from '@angular/forms';
-import { LabUserIdEditorComponent, LdapUserNameRenderComponent, JSONModalContentComponent } from './lab-user-cell.component';
+import { LabUserIdEditorComponent, LdapUserNameRenderComponent, LdapModalContentComponent } from './lab-user-cell.component';
 
 @NgModule({
   imports: [
@@ -14,13 +14,13 @@ import { LabUserIdEditorComponent, LdapUserNameRenderComponent, JSONModalContent
   entryComponents: [
     LabUserIdEditorComponent,
     LdapUserNameRenderComponent,
-    JSONModalContentComponent,
+    LdapModalContentComponent,
   ],
   declarations: [
     AuthenticationComponent,
     LabUserIdEditorComponent,
     LdapUserNameRenderComponent,
-    JSONModalContentComponent,
+    LdapModalContentComponent,
   ],
 })
 export class AuthenticationModule { }
