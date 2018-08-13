@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Ng2SmartTableModule, DefaultEditor } from 'ng2-smart-table';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AuthenticationComponent } from './authentication.component';
-import { FormsModule } from '../../../../node_modules/@angular/forms';
-import { ReadonlyEditorComponent } from './readonly.editor.component';
+import { FormsModule } from '@angular/forms';
+import { LabUserIdEditorComponent, LdapUserNameRenderComponent, JSONModalContentComponent } from './lab-user-cell.component';
 
 @NgModule({
   imports: [
@@ -12,11 +12,15 @@ import { ReadonlyEditorComponent } from './readonly.editor.component';
     Ng2SmartTableModule,
   ],
   entryComponents: [
-    ReadonlyEditorComponent,
+    LabUserIdEditorComponent,
+    LdapUserNameRenderComponent,
+    JSONModalContentComponent,
   ],
   declarations: [
     AuthenticationComponent,
-    ReadonlyEditorComponent,
+    LabUserIdEditorComponent,
+    LdapUserNameRenderComponent,
+    JSONModalContentComponent,
   ],
 })
 export class AuthenticationModule { }

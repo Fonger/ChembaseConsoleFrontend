@@ -6,8 +6,8 @@ import { LocalDataSource, DefaultEditor } from 'ng2-smart-table';
 import * as cloneDeep from 'clone-deep';
 import { Deferred, nextTick } from 'q';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
-import { Observable, of } from '../../../../node_modules/rxjs';
-import { ReadonlyEditorComponent, ReadonlyRenderComponent } from './readonly.editor.component';
+import { Observable, of } from 'rxjs';
+import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component';
 
 @Component({
   selector: 'chem-authentication',
@@ -58,7 +58,7 @@ export class AuthenticationComponent implements OnInit {
         type: 'string',
         editor: {
           type: 'custom',
-          component: ReadonlyEditorComponent,
+          component: LabUserIdEditorComponent,
         },
       },
       method: {
@@ -94,15 +94,17 @@ export class AuthenticationComponent implements OnInit {
             false: false,
           },
         },
+        filter: {
+          type: 'list',
+          config: {
+            list: [{ value: true, title: 'Verified' }, { value: false, title: 'Not Verified' } ],
+          },
+        },
       },
       username: {
         title: 'Ldap User Name',
-      },
-      info: {
-        title: 'Extra Info',
-        editor: {
-          type: 'textarea',
-        },
+        type: 'custom',
+        renderComponent: LdapUserNameRenderComponent,
       },
     },
   };

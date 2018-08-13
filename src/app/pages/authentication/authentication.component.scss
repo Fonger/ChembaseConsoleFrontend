@@ -12,6 +12,11 @@
   [disabled] {
     opacity: 0.5;
   }
+
+  /deep/ select {
+    height: unset !important;
+  }
+
   nb-tab {
     padding: nb-theme(padding);
   }
