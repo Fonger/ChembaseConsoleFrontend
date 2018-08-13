@@ -5,9 +5,7 @@ import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   template: `
-  <div class="input-group input-group-fill-only">
-    <input disabled class="form-control" [value]="cell.getValue()" placeholder="Auto Generatation">
-  </div>
+    <p style="margin: 7.5px 12px">{{ cell.getValue() || 'Auto Generation' }}</p>
   `,
 })
 export class LabUserIdEditorComponent extends DefaultEditor {}

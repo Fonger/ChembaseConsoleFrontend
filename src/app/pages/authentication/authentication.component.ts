@@ -92,12 +92,7 @@ export class AuthenticationComponent implements OnInit {
             false: false,
           },
         },
-        filter: {
-          type: 'list',
-          config: {
-            list: [{ value: true, title: 'Verified' }, { value: false, title: 'Not Verified' } ],
-          },
-        },
+
       },
       username: {
         title: 'Ldap User Name',
