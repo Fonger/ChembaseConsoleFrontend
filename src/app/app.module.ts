@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuardService } from './auth-guard.service';
+import { LabListResolver } from './pages/labs-resolver.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { AuthGuardService } from './auth-guard.service';
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     AuthGuardService,
+    LabListResolver,
   ],
 })
 export class AppModule {

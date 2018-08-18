@@ -1,16 +1,16 @@
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lab, LabUser } from './lab';
-import { skipWhile } from '../../../../node_modules/rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
 
 @Injectable()
 export class LabService {
   constructor(private http: HttpClient) {}
-  private selectedLab = new BehaviorSubject<Lab>(null);
+  private labSubject = new ReplaySubject<Lab>(1);
 
   getLabs(): Observable<Partial<Lab>[]> {
     return this.http.get<Partial<Lab>[]>('http://localhost:8080/api/v1/admin/labs')
@@ -20,19 +20,12 @@ export class LabService {
     return this.http.get<Lab>(`http://localhost:8080/api/v1/admin/labs/${labId}`)
   }
 
-  setSelectedLab(lab: Lab): Promise<Lab> {
-    return this.getLab(lab.id).toPromise().then(newLab => {
-      this.selectedLab.next(newLab)
-      return newLab
-    })
+  getCurrentLab(): Observable<Lab> {
+    return this.labSubject.asObservable()
   }
 
-  onSelectedLab(): Observable<Lab> {
-    return this.selectedLab.pipe(skipWhile( v => !v))
-  }
-
-  refreshSelectedLab(lab: Lab) {
-    this.selectedLab.next(lab)
+  setCurrentLab(lab: Lab) {
+    this.labSubject.next(lab)
   }
 
   updateLab(labId: string, content: DeepPartial<Lab>): Observable<Lab> {

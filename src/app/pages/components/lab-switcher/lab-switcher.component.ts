@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LabService, DeepPartial } from '../../../@core/data/lab.service';
+import { LabService } from '../../../@core/data/lab.service';
 import { Lab } from '../../../@core/data/lab';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'chem-lab-switcher',
@@ -8,22 +9,18 @@ import { Lab } from '../../../@core/data/lab';
   styleUrls: ['./lab-switcher.component.scss'],
 })
 export class LabSwitcherComponent implements OnInit {
-  constructor(private labService: LabService) {
+  constructor(private labService: LabService, private route: ActivatedRoute) {
     this.labs = []
   }
 
-  labs: DeepPartial<Lab[]>;
-  selectedLab?: Lab;
+  labs: Partial<Lab>[];
+  lab?: Lab;
 
   ngOnInit() {
-    this.labService.getLabs().subscribe(labs => {
-      this.labs = labs;
-      if (labs[0]) {
-        this.selectLab(labs[0])
-      }
-    })
-  }
-  selectLab(lab) {
-    this.labService.setSelectedLab(lab).then(newLab => this.selectedLab = newLab)
+    this.route.data
+      .subscribe((data: { labs?: Partial<Lab>[], lab?: Lab }) => {
+        if (data.labs) this.labs = data.labs
+        if (data.lab) this.lab = data.lab
+      });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LabService } from '../../@core/data/lab.service';
 import { EmailAuth, LdapAuth, Lab, LabUser } from '../../@core/data/lab';
 
@@ -6,31 +6,39 @@ import * as cloneDeep from 'clone-deep';
 import { Deferred } from 'q';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
 import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from '../../../../node_modules/rxjs';
+import { takeWhile } from '../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'chem-authentication',
   styleUrls: ['./authentication.component.scss'],
   templateUrl: './authentication.component.html',
 })
-export class AuthenticationComponent implements OnInit {
-  constructor(private labService: LabService) {}
+export class AuthenticationComponent implements OnInit, OnDestroy {
+  constructor(private labService: LabService, private route: ActivatedRoute, private router: Router) {}
   protected emailAuth: EmailAuth
   protected ldapAuth: LdapAuth
   protected lab?: Lab
   protected labUsers: LabUser[] = []
-
+  private subscription: Subscription
+  private firstInit = true
   ngOnInit() {
-    this.labService.onSelectedLab().subscribe(lab => {
-      if (!lab) return
+    this.subscription = this.labService.getCurrentLab().subscribe(lab => {
       this.lab = lab
       this.emailAuth = cloneDeep(lab.auth.email)
       this.ldapAuth = cloneDeep(lab.auth.ldap)
-      this.labService.getLabUsers(lab).subscribe(labUsers => {
-        this.labUsers = labUsers
-      })
+      if (this.firstInit) {
+        this.labService.getLabUsers(lab).subscribe(labUsers => {
+          this.labUsers = labUsers
+        })
+        this.firstInit = false
+      }
     });
   }
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
   settings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -92,7 +100,12 @@ export class AuthenticationComponent implements OnInit {
             false: false,
           },
         },
-
+        filter: {
+          type: 'list',
+          config: {
+            list: [{ value: true, title: 'Verified' }, { value: false, title: 'Not Verified' } ],
+          },
+        },
       },
       username: {
         title: 'Ldap User Name',
@@ -142,12 +155,13 @@ export class AuthenticationComponent implements OnInit {
   }
   onSubmitEmail($event: Event) {
     $event.preventDefault()
+
     this.labService.updateLab(this.lab.id, {
       auth: {
         email: this.emailAuth,
       },
     }).subscribe(lab => {
-      this.labService.refreshSelectedLab(lab)
+      this.labService.setCurrentLab(lab)
     })
   }
   onSubmitLdap($event: Event) {
@@ -157,7 +171,7 @@ export class AuthenticationComponent implements OnInit {
         ldap: this.ldapAuth,
       },
     }).subscribe(lab => {
-      this.labService.refreshSelectedLab(lab)
+      this.labService.setCurrentLab(lab)
     })
   }
 }

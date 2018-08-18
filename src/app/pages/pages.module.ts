@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { PagesComponent } from './pages.component';
+import { PagesComponent, NoLabComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BeakerModule } from './beakers/beaker.module';
 import { PagesRoutingModule } from './pages-routing.module';
@@ -10,8 +10,10 @@ import { CreateBeakerModule } from './beakers/create-beaker.module';
 import { ConfigBeakerModule } from './beakers/config-beaker.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ShellModule } from './shell/shell.module';
+import { LabResolver } from './lab-resolver.service';
 
 const PAGES_COMPONENTS = [
+  NoLabComponent,
   PagesComponent,
 ];
 
@@ -29,6 +31,9 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+  ],
+  providers: [
+    LabResolver,
   ],
 })
 export class PagesModule {

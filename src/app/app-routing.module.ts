@@ -9,12 +9,16 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { AuthGuardService } from './auth-guard.service';
+import { LabListResolver } from './pages/labs-resolver.service';
 
 const routes: Routes = [
   {
-    path: 'pages',
+    path: 'labs',
     canActivate: [AuthGuardService],
     loadChildren: 'app/pages/pages.module#PagesModule',
+    resolve: {
+      labs: LabListResolver,
+    },
   },
   {
     path: 'auth',
@@ -46,8 +50,8 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
+  { path: '', redirectTo: 'labs', pathMatch: 'full' },
+  { path: '**', redirectTo: 'labs' },
 ];
 
 const config: ExtraOptions = {
