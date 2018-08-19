@@ -5,16 +5,23 @@
 .bsoneditor-root {
   padding-bottom: 5px;
 }
-:host {
+
+@include nb-install-component() {
   /deep/ {
     .bsoneditor {
-      border: 1px solid #888888;
+      border: 1px solid nb-theme(border-color);
     }
     .bsoneditor-menu {
       /*display: none;*/
-      background-color: #888888;
-      border-bottom: 1px solid #888888;
+      background-color: nb-theme(color-fg);
+      border-bottom: 1px solid nb-theme(border-color);
       padding-left: 0 !important;
+      color: nb-theme(color-bg);
+    }
+    .bsoneditor-menu {
+      button {
+        color: nb-theme(color-bg);
+      }
     }
 
     div.bsoneditor-contextmenu {
@@ -54,6 +61,51 @@
       width: 100%;
       height: 100% !important;
     }
+
+    @include nb-for-theme(cosmic) {
+      .bsoneditor-menu {
+        background-color: #494299;
+        button {
+          color: #d1d1ff;
+        }
+        .bsoneditor-selected {
+          background-color: rgba(0, 255, 170, 0.25);
+        }
+      }
+      .bsoneditor-field {
+        color: #d1d1ff;
+      }
+      .bsoneditor-number {
+        color: greenyellow;
+      }
+      .bsoneditor-string {
+        color: cyan;
+      }
+      .bsoneditor-objectId {
+        color: orange;
+      }
+      .bsoneditor-date {
+        color: lightcoral;
+      }
+      .bsoneditor-readonly {
+        color: #a1a1e5;
+      }
+      .bsoneditor-highlight {
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+
+      div.bsoneditor-field[contenteditable=true]:focus,
+      div.bsoneditor-field[contenteditable=true]:hover,
+      div.bsoneditor-value[contenteditable=true]:focus,
+      div.bsoneditor-value[contenteditable=true]:hover,
+      div.bsoneditor-field.bsoneditor-highlight,
+      div.bsoneditor-value.bsoneditor-highlight {
+        background-color: rgba(255, 255, 255, 0.25);
+        border: 1px solid #d1d1ff;
+        border-radius: 2px;
+      }
+    }
+
   }
 }
 

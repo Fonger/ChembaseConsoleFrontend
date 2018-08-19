@@ -54,6 +54,7 @@
           // Hack for IE11, IE11 should not set background
           background: nb-theme(drops-icon-line-gadient);
           -webkit-background-clip: text;
+          background-clip: text;
           -webkit-text-fill-color: transparent;
         }
       }

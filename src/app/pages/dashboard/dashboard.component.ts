@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   lab?: Lab;
   labStats?: LabStats;
   subscription: Subscription;
-  themeSubscription: Subscription;
+  themeSubscription = new Subscription();
   fsOption = {};
   quotaOption = {};
   value = 0;
@@ -35,9 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.themeSubscription.unsubscribe()
   }
   setupChart(percent: number, target: 'fsOption' | 'quotaOption') {
-    this.themeSubscription = this.theme.getJsTheme().pipe(delay(1)).subscribe(config => {
+    this.themeSubscription.add(this.theme.getJsTheme().pipe(delay(1)).subscribe(config => {
       const solarTheme: any = config.variables.solar;
-
       this[target] = Object.assign({}, {
         tooltip: {
           trigger: 'item',
@@ -168,6 +167,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           },
         ],
       });
-    });
+    }))
   }
 }

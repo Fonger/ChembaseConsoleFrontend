@@ -50,7 +50,7 @@
     "@types/socket.io-client": "^1.4.32",
     "bootstrap": "4.0.0",
     "bson": "^3.0.2",
-    "bsoneditor": "git+ssh://git@github.com/Fonger/bsoneditor.git",
+    "bsoneditor": "github:Fonger/bsoneditor",
     "buffer": "^5.1.0",
     "bytes": "^3.0.0",
     "classlist.js": "1.1.20150312",
