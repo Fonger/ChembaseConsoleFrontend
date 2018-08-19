@@ -34,7 +34,7 @@ import {
 
 import { LabSwitcherComponent } from '../pages/components/lab-switcher/lab-switcher.component';
 
-import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
+import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, BytesPipe } from './pipes';
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
@@ -90,6 +90,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
+  BytesPipe,
 ];
 
 const NB_THEME_PROVIDERS = [

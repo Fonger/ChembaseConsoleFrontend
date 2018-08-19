@@ -72,6 +72,22 @@ export interface LabUser {
   password?: string;
   username?: string;
   verified?: boolean;
-  verifyCode?: string
-  info?: any
+  verifyCode?: string;
+  info?: any;
+}
+
+export interface LabStats {
+  db: string;
+  collections: number;
+  views: number;
+  objects: number;
+  avgObjSize: number;
+  dataSize: number;
+  storageSize: number;
+  numExtents: number;
+  indexes: number;
+  indexSize: number;
+  fsUsedSize: number;
+  fsTotalSize: number;
+  quotaSize: number;
 }

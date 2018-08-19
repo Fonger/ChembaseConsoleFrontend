@@ -12,6 +12,7 @@
       cursor: pointer;
       background-color: nb-theme(switcher-background);
       border-radius: nb-theme(radius);
+      border: 0;
 
       &:hover {
         $color: nb-theme(switcher-background);

@@ -2,7 +2,7 @@
 import { Observable, ReplaySubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Lab, LabUser } from './lab';
+import { Lab, LabUser, LabStats } from './lab';
 
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
 
@@ -29,6 +29,10 @@ export class LabService {
 
   updateLab(labId: string, content: DeepPartial<Lab>): Observable<Lab> {
     return this.http.patch<Lab>(`http://localhost:8080/api/v1/admin/labs/${labId}`, content)
+  }
+
+  getLabStats(lab: Lab): Observable<LabStats> {
+    return this.http.get<LabStats>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/stats`)
   }
 
   getLabUsers(lab: Lab): Observable<LabUser[]> {

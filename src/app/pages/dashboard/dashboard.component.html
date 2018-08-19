@@ -1,26 +1,79 @@
 <div class="row">
   <div class="col-md-12">
-    <nb-card size="medium" class="headings-card">
+    <nb-card size="xsmall" class="headings-card">
       <nb-card-body>
         <div class="header">
           <div>
             <h2>{{ lab.name }}</h2>
           </div>
           <div class="detail font-w-light">
-            {{ lab.id }}
+            Lab ID: {{ lab.id }}
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div *ngFor="let origin of lab.allowOrigins">{{ origin }}</div>
-          </div>
-          <div class="col-xxxl-3 col-md-6" *ngFor="let i of [1,2,3,4]">
-            {{ i }}
-          </div>
+        <div class="col-md-12">
+          <div *ngFor="let origin of lab.allowOrigins">{{ origin }}</div>
         </div>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
+<div class="row">
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+    <nb-card size="xsmall" class="solar-card">
+      <nb-card-body *ngIf="labStats">
+        <div class="summary-container">
+          <div class="summory">
+            <div class="title">Beakers</div>
+            <div class="value">#{{ labStats.collections }}</div>
+          </div>
+          <div class="summory">
+            <div class="title">Compounds</div>
+            <div class="value">#{{ labStats.objects }}</div>
+          </div>
+          <div class="summory">
+            <div class="title">Indexes</div>
+            <div class="value">#{{ labStats.indexes }}</div>
+          </div>
+        </div>
 
+        <div echarts [options]="fsOption" class="echart"></div>
+        <div class="info">
+          <div class="value">
+            {{ labStats.fsUsedSize | bytes }}
+          </div>
+          <div class="details"><span>Out of </span>{{ labStats.fsTotalSize | bytes }} <span>Capacity</span></div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+    <nb-card size="xsmall" class="solar-card">
+      <nb-card-body *ngIf="labStats">
+
+        <div class="summary-container">
+          <div class="summory">
+            <div class="title">Storage Size</div>
+            <div class="value"> {{ labStats.storageSize | bytes }}</div>
+          </div>
+          <div class="summory">
+            <div class="title">Data Size</div>
+            <div class="value"> {{ labStats.dataSize | bytes }}</div>
+          </div>
+          <div class="summory">
+            <div class="title">Index Size</div>
+            <div class="value"> {{ labStats.indexSize | bytes }}</div>
+          </div>
+        </div>
+
+        <div echarts [options]="quotaOption" class="echart"></div>
+        <div class="info">
+          <div class="value">
+              {{ labStats.storageSize | bytes }}
+          </div>
+          <div class="details"><span>Out of </span>{{ labStats.quotaSize | bytes }} <span>Quota</span></div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
 

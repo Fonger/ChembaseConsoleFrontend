@@ -1,4 +1,6 @@
 @import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 @include nb-install-component() {
 
@@ -118,5 +120,85 @@
 
   .bg-link {
     background: nb-theme(link-color);
+  }
+
+  $padding: 1rem;
+
+  nb-card-body {
+    overflow: hidden;
+    padding: $padding;
+  }
+
+  .info {
+    margin-left: 45%;
+    padding-top: 1.5rem;
+    color: nb-theme(color-fg);
+  }
+
+  .echart {
+    position: absolute;
+    left: 1em;
+    height: calc(100% - 6 * #{$padding} - 3.25rem);
+    width: 40%;
+  }
+
+  .value {
+    font-family: nb-theme(font-secondary);
+    font-size: 2rem;
+    font-weight: nb-theme(font-weight-bold);
+    color: nb-theme(color-fg-heading);
+  }
+
+  .details {
+    font-size: 1.25rem;
+    font-weight: nb-theme(font-weight-bolder);
+    line-height: 1;
+    span {
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+    }
+  }
+
+  .summary-container {
+    display: flex;
+    flex: 1;
+    background-color: nb-theme(chart-panel-summary-background-color);
+    box-shadow: nb-theme(chart-panel-summary-box-shadow);
+    justify-content: space-between;
+    padding: 1.5rem 4rem 1rem;
+    margin-bottom: $padding;
+    color: nb-theme(color-fg);
+    font-weight: nb-theme(font-weight-bolder);
+  }
+
+  .value {
+    font-size: 2rem;
+    color: nb-theme(color-fg-heading);
+    font-weight: nb-theme(font-weight-bold);
+  }
+
+  @include media-breakpoint-down(sm) {
+    .value, .title {
+      font-weight: nb-theme(font-weight-bold);
+    }
+
+    .title {
+      font-size: nb-theme(font-size-sm);
+    }
+
+    .value {
+      font-size: nb-theme(font-size-xlg);
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    .summary-container {
+      padding-left: nb-theme(padding);
+      padding-right: nb-theme(padding);
+    }
+
+    .value {
+      margin-top: 0.5rem;
+    }
   }
 }
