@@ -1,9 +1,8 @@
 
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lab, LabUser } from './lab';
-import { tap, map, catchError } from 'rxjs/operators';
 
 export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
 

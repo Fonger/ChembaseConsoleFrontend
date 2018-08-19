@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { delay, withLatestFrom, takeWhile } from 'rxjs/operators';
 import {
   NbMediaBreakpoint,

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
-import { Observable, of, BehaviorSubject, ReplaySubject } from 'rxjs';
-import { map, take, catchError, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { LabService } from '../@core/data/lab.service';
 import { Lab } from '../@core/data/lab';
 

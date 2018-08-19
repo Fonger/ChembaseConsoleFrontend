@@ -1,14 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LabService } from '../../@core/data/lab.service';
 import { EmailAuth, LdapAuth, Lab, LabUser } from '../../@core/data/lab';
-
 import * as cloneDeep from 'clone-deep';
 import { Deferred } from 'q';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
 import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from '../../../../node_modules/rxjs';
-import { takeWhile } from '../../../../node_modules/rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'chem-authentication',
@@ -16,7 +13,7 @@ import { takeWhile } from '../../../../node_modules/rxjs/operators';
   templateUrl: './authentication.component.html',
 })
 export class AuthenticationComponent implements OnInit, OnDestroy {
-  constructor(private labService: LabService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private labService: LabService) {}
   protected emailAuth: EmailAuth
   protected ldapAuth: LdapAuth
   protected lab?: Lab

@@ -3,7 +3,6 @@ import { NbMenuItem } from '@nebular/theme';
 
 import { DOCS_MENU_ITEMS } from './pages-docs-menu';
 import { LabService } from '../@core/data/lab.service';
-import { ActivatedRoute } from '@angular/router';
 import { Lab } from '../@core/data/lab';
 
 @Component({
@@ -16,13 +15,8 @@ import { Lab } from '../@core/data/lab';
   `,
 })
 export class NoLabComponent {
-  menu: NbMenuItem[]
+  menu: NbMenuItem[] = DOCS_MENU_ITEMS
   labs?: Partial<Lab>[]
-
-  constructor(private labService: LabService, private route: ActivatedRoute) {
-    this.menu = DOCS_MENU_ITEMS;
-  }
-
 }
 
 @Component({
@@ -39,7 +33,7 @@ export class PagesComponent implements OnInit {
   labs?: Partial<Lab>[]
   beakerMenu: NbMenuItem
 
-  constructor(private labService: LabService, private route: ActivatedRoute) {
+  constructor(private labService: LabService) {
     this.beakerMenu = {
       title: 'Beakers',
       icon: 'ion-beaker',

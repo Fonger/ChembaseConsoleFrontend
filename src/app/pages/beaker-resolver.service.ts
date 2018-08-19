@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
-import { Observable, of, BehaviorSubject, ReplaySubject } from 'rxjs';
-import { map, take, catchError, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { BeakerService } from '../@core/data/beaker.service';
 import { Lab } from '../@core/data/lab';
 import { Beaker } from '../@core/data/beaker';

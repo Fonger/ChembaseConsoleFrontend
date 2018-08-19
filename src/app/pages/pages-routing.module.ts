@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { PagesComponent, NoLabComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';

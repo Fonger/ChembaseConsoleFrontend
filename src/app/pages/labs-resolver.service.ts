@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, Resolve, RouterStateSnapshot,
+import { Resolve, RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { Lab } from '../@core/data/lab';
 
 @Injectable()
 export class LabListResolver implements Resolve<Partial<Lab>[]> {
-  constructor(private labService: LabService, private router: Router) {}
+  constructor(private labService: LabService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Partial<Lab>[]> {
     return this.labService.getLabs().pipe(

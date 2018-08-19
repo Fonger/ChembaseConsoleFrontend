@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LabService } from '../../../@core/data/lab.service';
 import { Lab } from '../../../@core/data/lab';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./lab-switcher.component.scss'],
 })
 export class LabSwitcherComponent implements OnInit {
-  constructor(private labService: LabService, private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
     this.labs = []
   }
 

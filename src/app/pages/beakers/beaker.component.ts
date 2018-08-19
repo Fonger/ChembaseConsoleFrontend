@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { mockdata } from './mockbeakerdata';
-import { BeakerService } from '../../@core/data/beaker.service';
-import { LabService } from '../../@core/data/lab.service';
 import { Beaker } from '../../@core/data/beaker';
 import { Lab } from '../../@core/data/lab';
-import { Subscription, of } from 'rxjs';
+import { of } from 'rxjs';
 import { CompoundService } from '../../@core/data/compound.service';
 import { catchError } from 'rxjs/operators';
 
@@ -17,15 +14,12 @@ import { catchError } from 'rxjs/operators';
 export class BeakerComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private labService: LabService,
-    private beakerService: BeakerService,
     private compoundService: CompoundService,
   ) {}
 
-  private lab?: Lab;
+  protected lab?: Lab;
   protected beaker?: Beaker
-  private subscription: Subscription;
-  compounds: any[];
+  protected compounds: any[];
 
   ngOnInit() {
     this.lab = this.route.parent.parent.snapshot.data.lab;
