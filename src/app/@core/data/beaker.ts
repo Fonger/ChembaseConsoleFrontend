@@ -1,4 +1,4 @@
-export class Beaker {
+export interface Beaker {
   id: string
   rule: {
     list: String
@@ -6,8 +6,5 @@ export class Beaker {
     update: string
     create: string
     delete: string,
-  }
-  hello() {
-    return this.id + '-hello'
   }
 }

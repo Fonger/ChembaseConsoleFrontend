@@ -6,12 +6,14 @@ import { StateService } from './state.service';
 import { LabService } from './lab.service';
 import { TokenInterceptor } from '../utils/token.interceptor';
 import { BeakerService } from './beaker.service';
+import { CompoundService } from './compound.service';
 
 const SERVICES = [
   UserService,
   StateService,
   LabService,
   BeakerService,
+  CompoundService,
 ];
 
 @NgModule({

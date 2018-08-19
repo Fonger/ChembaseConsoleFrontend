@@ -74,32 +74,29 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: { lab: Lab }) => {
-        if (!data.lab) return
-
-        this.beakerMenu.children = data.lab.beakers.map(beaker => {
-          return {
-            title: beaker.id,
-            link: `beakers/${beaker.id}`,
-            children: [
-              {
-                title: 'Data',
-                link: `beakers/${beaker.id}/data`,
-              },
-              {
-                title: 'ACL Rule & Index',
-                link: `beakers/${beaker.id}/config`,
-              },
-            ],
-          }
-        });
-        this.beakerMenu.children.push({
-          title: 'Create Beaker',
-          link: 'createbeaker',
-        });
-        this.menu[3].hidden = false
-        this.menu[4].hidden = false
+    this.labService.getCurrentLab().subscribe(lab => {
+      this.beakerMenu.children = lab.beakers.map(beaker => {
+        return {
+          title: beaker.id,
+          link: `beakers/${beaker.id}`,
+          children: [
+            {
+              title: 'Data',
+              link: `beakers/${beaker.id}/data`,
+            },
+            {
+              title: 'ACL Rule & Index',
+              link: `beakers/${beaker.id}/config`,
+            },
+          ],
+        }
       });
+      this.beakerMenu.children.push({
+        title: 'Create Beaker',
+        link: 'createbeaker',
+      });
+      this.menu[3].hidden = false
+      this.menu[4].hidden = false
+    });
   }
 }

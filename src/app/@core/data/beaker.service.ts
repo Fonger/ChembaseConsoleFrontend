@@ -18,6 +18,10 @@ export class BeakerService {
     return this.http.get<Beaker>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/beakers/${beakerId}`)
   }
 
+  createBeaker(lab: Lab, beaker: DeepPartial<Beaker>): Observable<Beaker> {
+    return this.http.post<Beaker>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/beakers`, beaker)
+  }
+
   updateBeaker(lab: Lab, beakerId: string, content: DeepPartial<Beaker>): Observable<Beaker> {
     return this.http.patch<Beaker>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/beakers/${beakerId}`, content)
   }

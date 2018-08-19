@@ -11,6 +11,7 @@ import { ConfigBeakerModule } from './beakers/config-beaker.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { ShellModule } from './shell/shell.module';
 import { LabResolver } from './lab-resolver.service';
+import { BeakerResolver } from './beaker-resolver.service';
 
 const PAGES_COMPONENTS = [
   NoLabComponent,
@@ -34,6 +35,7 @@ const PAGES_COMPONENTS = [
   ],
   providers: [
     LabResolver,
+    BeakerResolver,
   ],
 })
 export class PagesModule {

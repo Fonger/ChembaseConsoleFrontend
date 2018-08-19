@@ -7,8 +7,8 @@
     </nb-card -->
     <nb-card>
       <nb-card-body>
-        <div *ngFor="let data of mockdata">
-          <chem-bson-editor [data]="data" (onSave)="onCompoundSave($event)" (onRemove)="onCompoundRemove($event)">
+        <div *ngFor="let compound of compounds">
+          <chem-bson-editor [data]="compound" (onSave)="onCompoundSave($event)" (onRemove)="onCompoundRemove($event)">
 
           </chem-bson-editor>
         </div>

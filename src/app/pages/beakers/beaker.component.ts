@@ -5,54 +5,63 @@ import { BeakerService } from '../../@core/data/beaker.service';
 import { LabService } from '../../@core/data/lab.service';
 import { Beaker } from '../../@core/data/beaker';
 import { Lab } from '../../@core/data/lab';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
+import { CompoundService } from '../../@core/data/compound.service';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'chem-beaker',
   styleUrls: ['./beaker.component.scss'],
   templateUrl: './beaker.component.html',
 })
-export class BeakerComponent implements OnInit, OnDestroy {
+export class BeakerComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private labService: LabService,
     private beakerService: BeakerService,
+    private compoundService: CompoundService,
   ) {}
-  protected beaker?: Beaker
-  private mockdata = []
 
-  lab?: Lab;
-  subscription: Subscription;
+  private lab?: Lab;
+  protected beaker?: Beaker
+  private subscription: Subscription;
+  compounds: any[];
 
   ngOnInit() {
-    this.mockdata = mockdata
-    const beakerId = this.route.snapshot.paramMap.get('beakerId')
-
-    this.subscription = this.labService.getCurrentLab().subscribe(lab => {
-      this.beakerService.getBeaker(lab, beakerId).subscribe(beaker => {
-        this.beaker = beaker
+    this.lab = this.route.parent.parent.snapshot.data.lab;
+    this.route.data.subscribe(data => {
+      this.beaker = data.beaker
+      this.compoundService.getCompounds(this.lab, data.beaker).subscribe(compounds => {
+        this.compounds = compounds
       })
-    });
-  }
-  ngOnDestroy() {
-    this.subscription.unsubscribe()
+    })
   }
 
   onCompoundSave($event) {
     if ($event.error) throw $event.error
-    setTimeout(() => {
-      this.mockdata = this.mockdata.map(data => {
-        if (data._id.equals($event.result._id)) {
-          return data
-        }
-        return data
-      })
-    }, 1000)
+    const { _id, __version, ...destObject } = $event.result;
+    const update = { $set: destObject }
+    const compoundId = $event.result._id.toString();
 
+    this.compoundService
+      .updateCompound(this.lab, this.beaker, compoundId, update)
+      .pipe(catchError(error => of($event.old)))
+      .subscribe(compound => {
+        this.compounds = this.compounds.map(data => {
+          if (compound._id.equals(data._id)) {
+            return compound
+          }
+          return data
+        })
+      });
   }
   onCompoundRemove(compound) {
-    setTimeout(() => {
-      this.mockdata = this.mockdata.filter(d => !d._id.equals(compound._id))
-    }, 1000)
+    this.compoundService
+      .deleteCompound(this.lab, this.beaker, compound._id.toString())
+      .subscribe(deletedCompound => {
+        this.compounds = this.compounds.filter(c => !c._id.equals(deletedCompound._id));
+      }, error => {
+        console.error(error)
+      })
   }
 }
