@@ -188,6 +188,28 @@
     .header-container {
       .logo {
         font-size: 1.25rem;
+        padding: 0 0.8rem;
+      }
+    }
+
+    .navigation {
+      padding-right: 0 !important;
+    }
+
+    .logo-containter {
+      width: 100%;
+    }
+
+    chem-lab-switcher {
+      /deep/ {
+        i {
+          display: none;
+        }
+        span {
+          margin: 0 !important;
+          margin-right: 1rem !important;
+          font-size: 1rem;
+        }
       }
     }
 
@@ -204,9 +226,11 @@
     }
   }
 
+  /*
   @include media-breakpoint-down(xs) {
     .right /deep/ {
       display: none;
     }
   }
+  */
 }
