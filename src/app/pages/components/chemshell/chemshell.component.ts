@@ -3,6 +3,9 @@ import { Terminal, ITerminalOptions } from 'xterm';
 import { fit as termFit } from 'xterm/lib/addons/fit/fit';
 
 import * as io from 'socket.io-client';
+import { NbAuthService } from '@nebular/auth';
+import { Lab } from '../../../@core/data/lab';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'chem-shell',
@@ -41,8 +44,21 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
       brightWhite: '#ffffff',
     },
   }
+
+  constructor(
+    private authService: NbAuthService,
+    private route: ActivatedRoute,
+  ) {}
+
+  private token: String
+  private lab: Lab
+
   ngOnInit() {
     this.term = new Terminal(this.termOptions)
+    this.lab = this.route.parent.snapshot.data.lab;
+    this.authService.getToken().subscribe(token => {
+      this.token = token.getValue()
+    })
   }
 
   ngAfterViewInit() {
@@ -56,6 +72,7 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
       autoConnect: false,
       transports: ['websocket'],
       upgrade: false,
+      query: { token: this.token },
     })
     this.socket.on('connecting', () => {
       this.term.write('\x1b[32mConnecting to Chembase Server...\x1b[m\r\n')
@@ -74,7 +91,8 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     })
     this.socket.on('connect', () => {
       this.term.write('\x1b[32mStarting Chembase Mongo Shell...\x1b[m\r\n')
-      setTimeout(() => this.socket.emit('shell-start', 'iwantadminshell'), 1000)
+
+      setTimeout(() => this.socket.emit('shell-start', { labId: this.lab.id, apiKey: this.lab.apiKey }), 1000)
     })
     this.socket.on('disconnect', (r) => {
       this.term.write('\r\n\x1b[31mDisconnect from Chembase Mongo Shell.\x1b[m\r\n')
