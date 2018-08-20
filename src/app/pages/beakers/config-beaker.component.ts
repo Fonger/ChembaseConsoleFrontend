@@ -16,8 +16,10 @@ export class ConfigBeakerComponent implements OnInit {
   lab: Lab;
 
   ngOnInit() {
-    this.beaker = this.route.snapshot.data.beaker;
     this.lab = this.route.parent.parent.snapshot.data.lab;
+    this.route.data.subscribe(data => {
+      this.beaker = data.beaker
+    })
   }
   onSubmit(form: NgForm) {
   }

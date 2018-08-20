@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
 import { Beaker } from './beaker';
 
-export class Lab {
+export interface Lab {
   name: string;
   id: string;
   apiKey: string;
@@ -14,18 +11,6 @@ export class Lab {
     email: EmailAuth,
     ldap: LdapAuth,
   };
-
-  constructor(private http: HttpClient) { }
-
-  get(): Observable<Lab> {
-    return this.http.get<Lab>(`http://localhost:8080/api/v1/admin/labs/${this.id}`)
-  }
-  getBeakers(): Observable<Beaker[]> {
-    return this.http.get<Beaker[]>(`http://localhost:8080/api/v1/admin/labs/${this.id}/beakers`)
-  }
-  getBeaker(beakerId: string): Observable<Beaker> {
-    return this.http.get<Beaker>(`http://localhost:8080/api/v1/admin/labs/${this.id}/beakers/${beakerId}`)
-  }
 }
 
 export interface EmailAuth {

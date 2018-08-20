@@ -7,6 +7,7 @@ import { Lab } from './lab';
 import { Beaker } from './beaker';
 import { map } from 'rxjs/operators';
 import * as EJSON from 'mongodb-extjson';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class CompoundService {
@@ -14,20 +15,20 @@ export class CompoundService {
 
   getCompounds(lab: Lab, beaker: Beaker): Observable<any[]> {
     return this.http
-      .get<any>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds`)
+      .get<any>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds`)
       .pipe(map(data => EJSON.parse(data.compounds, { strict: false })))
   }
 
   updateCompound(lab: Lab, beaker: Beaker, compoundId: string, update: any): Observable<any> {
     update = { update: EJSON.stringify(update) };
     return this.http
-      .patch<any>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds/${compoundId}`, update)
+      .patch<any>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds/${compoundId}`, update)
       .pipe(map(data => EJSON.parse(data.compound, { strict: false })))
   }
 
   deleteCompound(lab: Lab, beaker: Beaker, compoundId: string): Observable<any> {
     return this.http
-      .delete<any>(`http://localhost:8080/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds/${compoundId}`)
+      .delete<any>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds/${compoundId}`)
       .pipe(map(data => EJSON.parse(data.compound, { strict: false })))
   }
 }

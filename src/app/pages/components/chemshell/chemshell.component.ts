@@ -8,6 +8,7 @@ import { Lab } from '../../../@core/data/lab';
 import { ActivatedRoute } from '@angular/router';
 import { NbThemeService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'chem-shell',
@@ -105,7 +106,7 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     termFit(this.term)
     this.term.focus()
 
-    this.socket = io('http://localhost:8080/admin', {
+    this.socket = io(`${environment.apiBaseUri}/admin`, {
       autoConnect: false,
       transports: ['websocket'],
       upgrade: false,

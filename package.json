@@ -17,7 +17,7 @@
   "scripts": {
     "ng": "ng",
     "conventional-changelog": "conventional-changelog",
-    "start": "ng serve",
+    "start": "ng serve --ssl true --ssl-cert ~/chembase-cert.pem --ssl-key ~/chembase-key.pem --host 0.0.0.0 --disable-host-check",
     "build": "ng build",
     "build:prod": "npm run build -- --prod --aot",
     "test": "ng test",

@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators/map';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -33,7 +34,7 @@ export const NB_CORE_PROVIDERS = [
           class: NbAuthJWTToken,
           key: 'token',
         },
-        baseEndpoint: 'http://localhost:8080/api/v1/admin',
+        baseEndpoint: `${environment.apiBaseUri}/api/v1/admin`,
         login: {
           endpoint: '/auth/sign-in',
           method: 'post',
