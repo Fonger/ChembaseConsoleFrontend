@@ -38,49 +38,49 @@ export class PagesComponent implements OnInit {
       title: 'Beakers',
       icon: 'ion-beaker',
       children: [],
-    },
-    this.menu = [
-      {
-        title: 'Dashboard',
-        icon: 'ion-home',
-        link: 'dashboard',
-        home: true,
-      },
-      {
-        title: 'DEVELOPMENT',
-        group: true,
-      },
-      this.beakerMenu,
-      {
-        title: 'Authentication',
-        icon: 'ion-person-stalker',
-        link: 'auth',
-        hidden: true,
-      },
-      {
-        title: 'Shell',
-        icon: 'ion-ios-monitor',
-        link: 'shell',
-        hidden: true,
-      },
-      ...DOCS_MENU_ITEMS,
-    ];
+    }
   }
 
   ngOnInit() {
     this.labService.getCurrentLab().subscribe(lab => {
+      this.menu = [
+        {
+          title: 'Dashboard',
+          icon: 'ion-home',
+          link: `/labs/${lab.id}/dashboard`,
+          home: true,
+        },
+        {
+          title: 'DEVELOPMENT',
+          group: true,
+        },
+        this.beakerMenu,
+        {
+          title: 'Authentication',
+          icon: 'ion-person-stalker',
+          link: `/labs/${lab.id}/auth`,
+          hidden: true,
+        },
+        {
+          title: 'Shell',
+          icon: 'ion-ios-monitor',
+          link: `/labs/${lab.id}/shell`,
+          hidden: true,
+        },
+        ...DOCS_MENU_ITEMS,
+      ];
       this.beakerMenu.children = lab.beakers.map(beaker => {
         return {
           title: beaker.id,
-          link: `beakers/${beaker.id}`,
+          link: `/labs/${lab.id}/beakers/${beaker.id}`,
           children: [
             {
               title: 'Data',
-              link: `beakers/${beaker.id}/data`,
+              link: `/labs/${lab.id}/beakers/${beaker.id}/data`,
             },
             {
               title: 'ACL Rule & Index',
-              link: `beakers/${beaker.id}/config`,
+              link: `/labs/${lab.id}/beakers/${beaker.id}/config`,
             },
           ],
         }

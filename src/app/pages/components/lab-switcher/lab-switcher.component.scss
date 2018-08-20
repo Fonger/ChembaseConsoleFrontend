@@ -13,6 +13,7 @@
       background-color: nb-theme(switcher-background);
       border-radius: nb-theme(radius);
       border: 0;
+      text-transform: none;
 
       &:hover {
         $color: nb-theme(switcher-background);
