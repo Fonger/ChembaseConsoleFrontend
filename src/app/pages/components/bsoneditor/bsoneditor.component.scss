@@ -76,16 +76,19 @@
         color: #d1d1ff;
       }
       .bsoneditor-number {
-        color: greenyellow;
+        color: #33e092;
       }
       .bsoneditor-string {
-        color: cyan;
+        color: #339fff;
       }
       .bsoneditor-objectId {
         color: orange;
       }
       .bsoneditor-date {
         color: lightcoral;
+      }
+      .bsoneditor-boolean {
+        color: #d85786;
       }
       .bsoneditor-readonly {
         color: #a1a1e5;
