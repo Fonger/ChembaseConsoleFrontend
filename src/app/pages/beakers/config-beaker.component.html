@@ -4,35 +4,35 @@
     <nb-card>
       <nb-tabset>
         <nb-tab tabTitle="ACL Rule">
-          <form (submit)="onSubmit(beakerForm)" #beakerForm="ngForm">
+          <form (submit)="onSubmit(ruleForm)" #ruleForm="ngForm">
             <div class="form-group row">
               <label for="listRuleInput" class="col-sm-2 col-form-label">List</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="listRuleInput" name="listRule" placeholder="" required>
+                <input ngModel class="form-control" id="listRuleInput" name="list" placeholder="" required>
               </div>
             </div>
             <div class="form-group row">
                 <label for="getRuleInput" class="col-sm-2 col-form-label">Get</label>
                 <div class="col-sm-10">
-                  <input ngModel class="form-control" id="getRuleInput" name="getRule" placeholder="" required>
+                  <input ngModel class="form-control" id="getRuleInput" name="get" placeholder="" required>
                 </div>
               </div>
             <div class="form-group row">
               <label for="createRuleInput" class="col-sm-2 col-form-label">Create</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="createRuleInput" name="createRule" placeholder="">
+                <input ngModel class="form-control" id="createRuleInput" name="create" placeholder="">
               </div>
             </div>
             <div class="form-group row">
               <label for="updateRuleInput" class="col-sm-2 col-form-label">Update</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="updateRuleInput" name="updateRule" placeholder="">
+                <input ngModel class="form-control" id="updateRuleInput" name="update" placeholder="">
               </div>
             </div>
             <div class="form-group row">
               <label for="deleteRuleInput" class="col-sm-2 col-form-label">Delete</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="deleteRuleInput" name="deleteRule" placeholder="">
+                <input ngModel class="form-control" id="deleteRuleInput" name="delete" placeholder="">
               </div>
             </div>
 

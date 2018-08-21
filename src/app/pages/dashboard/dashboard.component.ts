@@ -6,11 +6,14 @@ import { NbThemeService } from '@nebular/theme';
 import { delay } from 'rxjs/operators';
 import * as echarts from 'echarts';
 
+enum OriginOperation { Create, Edit, Delete }
+
 @Component({
   selector: 'chem-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
+
 export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private labService: LabService, private theme: NbThemeService) {}
   lab?: Lab;
@@ -19,14 +22,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
   themeSubscription = new Subscription();
   fsOption = {};
   quotaOption = {};
+  originTableSettings = {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    columns: {
+      origin: {
+        title: 'Trusted Origin',
+      },
+    },
+  };
+  allowOrigins: { origin: string }[] = []
+
   value = 0;
   ngOnInit() {
     this.subscription = this.labService.getCurrentLab().subscribe(lab => {
       this.lab = lab
+      this.allowOrigins = lab.allowOrigins.map(origin => ({ origin }))
       this.labService.getLabStats(lab).subscribe(stats => {
-        this.labStats = stats;
-        this.setupChart(Math.round(this.labStats.fsUsedSize / this.labStats.fsTotalSize * 100), 'fsOption');
-        this.setupChart(Math.round(this.labStats.storageSize / this.labStats.quotaSize * 100), 'quotaOption');
+        this.labStats = stats
+        this.setupChart(Math.round(this.labStats.fsUsedSize / this.labStats.fsTotalSize * 100), 'fsOption')
+        this.setupChart(Math.round(this.labStats.storageSize / this.labStats.quotaSize * 100), 'quotaOption')
       })
     });
   }
@@ -34,6 +63,41 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe()
     this.themeSubscription.unsubscribe()
   }
+
+  onCreateOrigin($event) {
+    this.updateAllOrigin($event, OriginOperation.Create)
+  }
+  onEditOrigin($event) {
+    this.updateAllOrigin($event, OriginOperation.Edit)
+  }
+  onDeleteOrigin($event) {
+    this.updateAllOrigin($event, OriginOperation.Delete)
+  }
+  async updateAllOrigin($event, operation: OriginOperation) {
+    const newAllowOrigins: string[] = $event.source.data.map(o => o.origin)
+
+    if (operation === OriginOperation.Create) {
+      newAllowOrigins.unshift($event.newData.origin)
+    } else {
+      const index = newAllowOrigins.findIndex(o => o === $event.data.origin)
+      if (operation === OriginOperation.Delete) {
+        newAllowOrigins.splice(index, 1)
+      } else if (operation === OriginOperation.Edit) {
+        newAllowOrigins[index] = $event.newData.origin
+      }
+    }
+
+    this.labService.updateLab(this.lab.id, {
+      allowOrigins: newAllowOrigins,
+    }).subscribe(lab => {
+      $event.confirm.resolve()
+      this.labService.setCurrentLab(lab)
+    }, error => {
+      console.error(error)
+      $event.confirm.reject()
+    })
+  }
+
   setupChart(percent: number, target: 'fsOption' | 'quotaOption') {
     this.themeSubscription.add(this.theme.getJsTheme().pipe(delay(1)).subscribe(config => {
       const solarTheme: any = config.variables.solar;

@@ -10,6 +10,7 @@
   /deep/ {
     .bsoneditor {
       border: 1px solid nb-theme(border-color);
+      line-height: unset;
     }
     .bsoneditor-menu {
       /*display: none;*/
