@@ -33,6 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'beakers/:beakerId',
+        runGuardsAndResolvers: 'always',
         resolve: {
           beaker: BeakerResolver,
         },

@@ -13,9 +13,8 @@ import { Lab } from '../../@core/data/lab';
 export class ConfigBeakerComponent implements OnInit {
   constructor(private route: ActivatedRoute, private beakerService: BeakerService) {}
 
-  beaker: Beaker;
-  aclRule: ACLRule;
   lab: Lab;
+  beaker: Beaker;
 
   ngOnInit() {
     this.lab = this.route.parent.parent.snapshot.data.lab;

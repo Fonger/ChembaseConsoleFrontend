@@ -4,35 +4,35 @@
     <nb-card>
       <nb-tabset>
         <nb-tab tabTitle="ACL Rule">
-          <form (submit)="onSubmit(ruleForm)" #ruleForm="ngForm">
+          <form (submit)="onSubmit(ruleForm)" #ruleForm="ngForm" *ngIf="beaker.rule">
             <div class="form-group row">
               <label for="listRuleInput" class="col-sm-2 col-form-label">List</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="listRuleInput" name="list" placeholder="" required>
+                <input [ngModel]="beaker.rule.list" class="form-control" id="listRuleInput" name="list" placeholder="" required>
               </div>
             </div>
             <div class="form-group row">
                 <label for="getRuleInput" class="col-sm-2 col-form-label">Get</label>
                 <div class="col-sm-10">
-                  <input ngModel class="form-control" id="getRuleInput" name="get" placeholder="" required>
+                  <input [ngModel]="beaker.rule.get" class="form-control" id="getRuleInput" name="get" placeholder="" required>
                 </div>
               </div>
             <div class="form-group row">
               <label for="createRuleInput" class="col-sm-2 col-form-label">Create</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="createRuleInput" name="create" placeholder="">
+                <input [ngModel]="beaker.rule.create" class="form-control" id="createRuleInput" name="create" placeholder="">
               </div>
             </div>
             <div class="form-group row">
               <label for="updateRuleInput" class="col-sm-2 col-form-label">Update</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="updateRuleInput" name="update" placeholder="">
+                <input [ngModel]="beaker.rule.update" class="form-control" id="updateRuleInput" name="update" placeholder="">
               </div>
             </div>
             <div class="form-group row">
               <label for="deleteRuleInput" class="col-sm-2 col-form-label">Delete</label>
               <div class="col-sm-10">
-                <input ngModel class="form-control" id="deleteRuleInput" name="delete" placeholder="">
+                <input [ngModel]="beaker.rule.delete" class="form-control" id="deleteRuleInput" name="delete" placeholder="">
               </div>
             </div>
 
