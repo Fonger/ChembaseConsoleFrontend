@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Beaker, ACLRule } from '../../@core/data/beaker';
+import { Beaker } from '../../@core/data/beaker';
 import { BeakerService } from '../../@core/data/beaker.service';
 import { Lab } from '../../@core/data/lab';
 

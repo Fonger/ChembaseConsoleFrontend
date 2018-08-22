@@ -49,6 +49,6 @@ export class LabService {
   }
 
   deleteLabUser(lab: Lab, user: LabUser): Observable<Partial<LabUser>> {
-    return this.http.get<Partial<LabUser>>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users/${user._id}`)
+    return this.http.delete<Partial<LabUser>>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users/${user._id}`)
   }
 }
