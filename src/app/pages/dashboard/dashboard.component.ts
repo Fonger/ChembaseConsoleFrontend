@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   labStats?: LabStats;
   subscription: Subscription;
   themeSubscription = new Subscription();
+  newName?: string;
   fsOption = {};
   quotaOption = {};
   originTableSettings = {
@@ -64,6 +65,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe()
     this.themeSubscription.unsubscribe()
+  }
+
+  editLabName() {
+    this.newName = this.lab.name
+  }
+  saveLabName() {
+    this.labService.updateLab(this.lab.id, {
+      name: this.newName,
+    }).subscribe(lab => {
+      this.labService.setCurrentLab(lab)
+    }, error => {
+      console.error(error)
+    }, () => {
+      this.newName = null
+    })
   }
 
   onCreateOrigin($event) {

@@ -1,8 +1,11 @@
 <div class="row">
   <div class="col-md-12">
     <div class="header">
-      <div>
-        <h2>{{ lab.name }}</h2>
+      <div *ngIf="!newName">
+        <h2>{{ lab.name }} <a href="javascript:void(0)" (click)="editLabName()"><i class="nb-edit"></i></a></h2>
+      </div>
+      <div *ngIf="newName">
+        <input class="form-control" [(ngModel)]="newName" (blur)="saveLabName()" (keydown.enter)="saveLabName()">
       </div>
       <div class="detail font-w-light">
         Lab ID: {{ lab.id }}
@@ -17,15 +20,15 @@
         <div class="summary-container">
           <div class="summory">
             <div class="title">Beakers</div>
-            <div class="value">#{{ labStats.collections }}</div>
+            <div class="value">{{ labStats.collections }} / 10</div>
           </div>
           <div class="summory">
             <div class="title">Compounds</div>
-            <div class="value">#{{ labStats.objects }}</div>
+            <div class="value">{{ labStats.objects }} / 10 k</div>
           </div>
           <div class="summory">
             <div class="title">Indexes</div>
-            <div class="value">#{{ labStats.indexes }}</div>
+            <div class="value">{{ labStats.indexes }} / 10</div>
           </div>
         </div>
 
