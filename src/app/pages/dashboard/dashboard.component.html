@@ -1,24 +1,13 @@
 <div class="row">
   <div class="col-md-12">
-    <nb-card class="headings-card">
-      <nb-card-body>
-        <div class="header">
-          <div>
-            <h2>{{ lab.name }}</h2>
-          </div>
-          <div class="detail font-w-light">
-            Lab ID: {{ lab.id }}
-          </div>
-        </div>
-        <ng2-smart-table
-          [settings]="originTableSettings"
-          [source]="allowOrigins"
-          (createConfirm)="onCreateOrigin($event)"
-          (editConfirm)="onEditOrigin($event)"
-          (deleteConfirm)="onDeleteOrigin($event)">
-        </ng2-smart-table>
-      </nb-card-body>
-    </nb-card>
+    <div class="header">
+      <div>
+        <h2>{{ lab.name }}</h2>
+      </div>
+      <div class="detail font-w-light">
+        Lab ID: {{ lab.id }}
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -53,7 +42,6 @@
   <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
     <nb-card size="xsmall" class="solar-card">
       <nb-card-body *ngIf="labStats">
-
         <div class="summary-container">
           <div class="summory">
             <div class="title">Storage</div>
@@ -72,12 +60,35 @@
         <div echarts [options]="quotaOption" class="echart"></div>
         <div class="info">
           <div class="value">
-              {{ labStats.storageSize | bytes }}
+            {{ labStats.storageSize | bytes }}
           </div>
           <div class="details"><span>Out of </span>{{ labStats.quotaSize | bytes }} <span>Quota</span></div>
         </div>
       </nb-card-body>
     </nb-card>
   </div>
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+    <nb-card>
+      <nb-card-header>Trusted Domain Origin</nb-card-header>
+      <nb-card-body>
+        <ng2-smart-table [settings]="originTableSettings" [source]="allowOrigins" (createConfirm)="onCreateOrigin($event)" (editConfirm)="onEditOrigin($event)"
+          (deleteConfirm)="onDeleteOrigin($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+    <nb-card class="quickcard">
+      <nb-card-header>Chembase v0.0.1 (Unstable)</nb-card-header>
+      <nb-card-body>
+        <p>Chembase is still under active development.</p>
+        <br><br>
+        <p>
+          <a class="btn btn-hero-info" href="https://github.com/chembase"><i class="ion-code-download"></i> SDK</a>
+          <a class="btn btn-hero-primary" href="https://github.com/chembase"><i class="ion-social-github"></i> GitHub</a>
+          <a class="btn btn-hero-success" href="https://github.com/chembase"><i class="ion-ios-help-outline"></i> Help</a>
+        </p>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>
-

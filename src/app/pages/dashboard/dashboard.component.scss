@@ -131,7 +131,7 @@
 
   .info {
     margin-left: 45%;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     color: nb-theme(color-fg);
   }
 
@@ -199,6 +199,20 @@
 
     .value {
       margin-top: 0.5rem;
+    }
+  }
+
+  .quickcard {
+    height: calc(100% - 1.5rem);
+    .btn {
+      @include nb-ltr(margin, 0 0.75rem 2rem 0);
+      @include nb-rtl(margin, 0 0 2rem 0.75rem);
+      text-align: center;
+      vertical-align: middle;
+      font-size: 1.2rem;
+    }
+    i {
+      padding-right: 0.5rem;
     }
   }
 }

@@ -38,9 +38,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
       deleteButtonContent: '<i class="nb-trash"></i>',
       confirmDelete: true,
     },
+    hideHeader: true,
+    noDataMessage: 'You must add at least one whitelist to make Chembase web sdk work.',
     columns: {
       origin: {
         title: 'Trusted Origin',
+        filter: false,
       },
     },
   };
