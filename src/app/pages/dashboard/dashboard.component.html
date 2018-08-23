@@ -87,7 +87,7 @@
         <p>Chembase is still under active development.</p>
         <br><br>
         <p>
-          <a class="btn btn-hero-info" href="https://github.com/chembase"><i class="ion-code-download"></i> SDK</a>
+          <a class="btn btn-hero-info" href="javascript:void(0)" (click)="openModal(sdkModal)"><i class="ion-code-download"></i> SDK</a>
           <a class="btn btn-hero-primary" href="https://github.com/chembase"><i class="ion-social-github"></i> GitHub</a>
           <a class="btn btn-hero-success" href="https://github.com/chembase"><i class="ion-ios-help-outline"></i> Help</a>
         </p>
@@ -95,3 +95,14 @@
     </nb-card>
   </div>
 </div>
+<ng-template #sdkModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Chembase Web SDK</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <pre>{{SDK_USAGE}}</pre>
+  </div>
+</ng-template>

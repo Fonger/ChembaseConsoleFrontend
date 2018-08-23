@@ -4,6 +4,7 @@ import { Subscription } from '../../../../node_modules/rxjs';
 import { LabService } from '../../@core/data/lab.service';
 import { NbThemeService } from '@nebular/theme';
 import { delay } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 enum OriginOperation { Create, Edit, Delete }
 
@@ -14,7 +15,11 @@ enum OriginOperation { Create, Edit, Delete }
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
-  constructor(private labService: LabService, private theme: NbThemeService) {}
+  constructor(
+    private labService: LabService,
+    private theme: NbThemeService,
+    private modalService: NgbModal,
+  ) {}
   lab?: Lab;
   labStats?: LabStats;
   subscription: Subscription;
@@ -49,7 +54,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     },
   };
   allowOrigins: { origin: string }[] = []
-
+  SDK_USAGE: string
   value = 0;
   ngOnInit() {
     this.subscription = this.labService.getCurrentLab().subscribe(lab => {
@@ -60,6 +65,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.setupChart(Math.round(this.labStats.fsUsedSize / this.labStats.fsTotalSize * 100), 'fsOption')
         this.setupChart(Math.round(this.labStats.storageSize / this.labStats.quotaSize * 100), 'quotaOption')
       })
+      this.SDK_USAGE = '<script src="chembase-sdk-v0.0.1"></script>\n'
+        + '<script>\n'
+        + `var lab = Chembase.Lab('${lab.id}')\n`
+        + `</script>\n`
     });
   }
   ngOnDestroy() {
@@ -250,5 +259,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
         ],
       });
     }))
+  }
+
+  openModal(modal) {
+    this.modalService.open(modal)
   }
 }
