@@ -33,8 +33,15 @@ export class BeakerComponent implements OnInit {
 
   onCompoundSave($event) {
     if ($event.error) throw $event.error
+    const oldKeys = Object.keys($event.old)
+    const newKeys = Object.keys($event.result)
+    const unsetKeys = oldKeys.filter(oldKey => !newKeys.includes(oldKey))
+
     const { _id, __version, ...destObject } = $event.result;
-    const update = { $set: destObject }
+    const update: any = { $set: destObject }
+    if (unsetKeys.length > 0) {
+      update.$unset = unsetKeys.reduce((unsetObj, key) => ({ ...unsetObj, [key]: 1 }), {})
+    }
     const compoundId = $event.result._id.toString();
 
     this.compoundService
