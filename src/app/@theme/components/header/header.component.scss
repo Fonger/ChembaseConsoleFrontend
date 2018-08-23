@@ -57,7 +57,7 @@
         font-weight: nb-theme(font-weight-normal);
       }
 
-      background: url(nb-theme(logo-src)) no-repeat center;
+      background: nb-theme(logo-url) no-repeat center;
       background-size: contain;
       /* background-origin: content-box, content-box; */
       height: 2.25rem;
