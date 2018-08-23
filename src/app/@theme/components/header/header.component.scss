@@ -56,6 +56,12 @@
       span {
         font-weight: nb-theme(font-weight-normal);
       }
+
+      background: url(nb-theme(logo-src)) no-repeat center;
+      background-size: contain;
+      /* background-origin: content-box, content-box; */
+      height: 2.25rem;
+      width: 100%;
     }
   }
 
@@ -84,6 +90,11 @@
 
   chem-theme-switcher {
     margin: nb-theme(layout-padding);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  chem-lab-switcher {
+    margin-left: 2.25rem;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -171,6 +182,9 @@
       display: none;
     }
 
+    chem-lab-switcher {
+      margin: 0 0.5rem;
+    }
     chem-theme-switcher {
       margin: 0 0.5rem;
     }
@@ -197,10 +211,11 @@
     }
 
     .logo-containter {
-      width: 100%;
+      width: 150px;
     }
 
     chem-lab-switcher {
+      margin-left: 0.5rem;
       /deep/ {
         i {
           display: none;

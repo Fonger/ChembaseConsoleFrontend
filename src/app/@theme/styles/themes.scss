@@ -12,6 +12,9 @@ $nb-themes: nb-register-theme((
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
+  logo-src: '/assets/images/chembase_light_logo.png',
+  logo-color: #40dc7e,
+
   font-main: Roboto,
   font-secondary: Exo,
 
@@ -26,6 +29,9 @@ $nb-themes: nb-register-theme((
   sidebar-header-height: initial,
   layout-content-width: 1400px,
 
+  logo-src: '/assets/images/chembase_cosmic_logo.png',
+  logo-color: #d06df2,
+
   font-main: Roboto,
   font-secondary: Exo,
 
@@ -39,6 +45,9 @@ $nb-themes: nb-register-theme((
   sidebar-header-gap: 0,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
+
+  logo-src: '/assets/images/chembase_coporate_logo.png',
+  logo-color: #1fa8d7,
 
   font-main: Roboto,
   font-secondary: Exo,
