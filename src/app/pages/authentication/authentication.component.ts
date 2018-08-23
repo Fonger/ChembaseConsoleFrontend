@@ -6,6 +6,7 @@ import { Deferred } from 'q';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
 import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'chem-authentication',
@@ -152,7 +153,6 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   }
   onSubmitEmail($event: Event) {
     $event.preventDefault()
-
     this.labService.updateLab(this.lab.id, {
       auth: {
         email: this.emailAuth,
@@ -169,6 +169,30 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
       },
     }).subscribe(lab => {
       this.labService.setCurrentLab(lab)
+    })
+  }
+  onSaveVerifyTemplate(form: NgForm) {
+    this.emailAuth.template.verify = form.value
+    this.labService.updateLab(this.lab.id, {
+      auth: {
+        email: this.emailAuth,
+      },
+    }).subscribe(lab => {
+      this.labService.setCurrentLab(lab)
+    }, error => {
+      console.error(error)
+    })
+  }
+  onSaveResetTemplate(form: NgForm) {
+    this.emailAuth.template.reset = form.value
+    this.labService.updateLab(this.lab.id, {
+      auth: {
+        email: this.emailAuth,
+      },
+    }).subscribe(lab => {
+      this.labService.setCurrentLab(lab)
+    }, error => {
+      console.error(error)
     })
   }
 }

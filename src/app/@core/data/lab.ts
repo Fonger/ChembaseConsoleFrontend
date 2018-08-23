@@ -27,15 +27,13 @@ export interface EmailAuth {
     ca?: string;
   };
   template?: {
-    verify: {
-      subject: string,
-      content: string,
-    },
-    reset: {
-      subject: string,
-      content: string,
-    },
+    verify: EmailTemplate,
+    reset: EmailTemplate,
   };
+}
+export interface EmailTemplate {
+  subject: string;
+  content: string;
 }
 export interface LdapAuth {
   enabled: boolean;
