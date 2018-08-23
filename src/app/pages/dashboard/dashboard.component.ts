@@ -4,7 +4,6 @@ import { Subscription } from '../../../../node_modules/rxjs';
 import { LabService } from '../../@core/data/lab.service';
 import { NbThemeService } from '@nebular/theme';
 import { delay } from 'rxjs/operators';
-import * as echarts from 'echarts';
 
 enum OriginOperation { Create, Edit, Delete }
 
