@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { LabService } from '../../@core/data/lab.service';
-import { EmailAuth, LdapAuth, Lab, LabUser } from '../../@core/data/lab';
+import { EmailAuth, LdapAuth, Lab, LabUser, EmailTemplate } from '../../@core/data/lab';
 import * as cloneDeep from 'clone-deep';
 import { Deferred } from 'q';
 import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
@@ -21,6 +21,9 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   protected labUsers: LabUser[] = []
   private subscription: Subscription
   private firstInit = true
+  readonly VERIFY_ID = '{{VERIFY_ID}}'
+  readonly VERIFY_CODE = '{{VERIFY_CODE}}'
+
   ngOnInit() {
     this.subscription = this.labService.getCurrentLab().subscribe(lab => {
       this.lab = lab
@@ -194,6 +197,29 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
     }, error => {
       console.error(error)
     })
+  }
+
+  @ViewChild('verifyContentElement')
+  verifyContentEl: ElementRef
+
+  @ViewChild('resetContentElement')
+  resetContentEl: ElementRef
+
+  insertVerifyContentText(template: EmailTemplate, text: string) {
+    const el = this.verifyContentEl.nativeElement
+    const pos = el.selectionStart || 0;
+    el.value = el.value.substr(0, pos) + text + el.value.substr(pos)
+    el.focus()
+    el.setSelectionRange(pos, pos + text.length)
+    el.dispatchEvent(new Event('input'));
+  }
+  insertResetContentText(template: EmailTemplate, text: string) {
+    const el = this.resetContentEl.nativeElement
+    const pos = el.selectionStart || 0;
+    el.value = el.value.substr(0, pos) + text + el.value.substr(pos)
+    el.focus()
+    el.setSelectionRange(pos, pos + text.length)
+    el.dispatchEvent(new Event('input'));
   }
 }
 
