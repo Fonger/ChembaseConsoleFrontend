@@ -17,6 +17,9 @@ import {
   NbCheckboxModule,
   NbPopoverModule,
   NbContextMenuModule,
+  NbAlertModule,
+  NbInputModule,
+  NbButtonModule,
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
@@ -45,6 +48,9 @@ import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
 import { RouterModule } from '@angular/router';
+import { ChemLoginComponent } from './components/auth/login/login.comonent';
+import { ChemAuthBlockComponent } from './components/auth/auth-block/auth-block.component';
+import { ChemAuthComponent } from './components/auth/auth.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, RouterModule];
 
@@ -63,6 +69,9 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
+  NbAlertModule,
+  NbInputModule,
+  NbButtonModule,
 ];
 
 const COMPONENTS = [
@@ -79,6 +88,9 @@ const COMPONENTS = [
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
   LabSwitcherComponent,
+  ChemAuthComponent,
+  ChemLoginComponent,
+  ChemAuthBlockComponent,
 ];
 
 const ENTRY_COMPONENTS = [

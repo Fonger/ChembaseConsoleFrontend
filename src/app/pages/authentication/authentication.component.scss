@@ -40,10 +40,10 @@
         font-size: 1rem;
         margin: 0;
       }
-    }
-    @include nb-for-theme(cosmic) {
-      .ldap-info {
-        color: #a1a1e5;
+      @include nb-for-theme(cosmic) {
+        a {
+          color: #a1a1e5 !important
+        }
       }
     }
     chem-tab1, chem-tab2 {

@@ -1,8 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import {
-  NbAuthComponent,
-  NbLoginComponent,
   NbLogoutComponent,
   NbRegisterComponent,
   NbRequestPasswordComponent,
@@ -10,6 +8,8 @@ import {
 } from '@nebular/auth';
 import { AuthGuardService } from './auth-guard.service';
 import { LabListResolver } from './pages/labs-resolver.service';
+import { ChemLoginComponent } from './@theme/components/auth/login/login.comonent';
+import { ChemAuthComponent } from './@theme/components/auth/auth.component';
 
 const routes: Routes = [
   {
@@ -22,15 +22,15 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    component: NbAuthComponent,
+    component: ChemAuthComponent,
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: ChemLoginComponent,
       },
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: ChemLoginComponent,
       },
       {
         path: 'register',
