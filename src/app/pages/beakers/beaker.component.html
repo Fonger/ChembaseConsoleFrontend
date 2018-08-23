@@ -1,15 +1,23 @@
 <div class="row">
   <div class="col-md-12">
-    <!--nb-card>
+    <nb-card>
       <nb-card-body>
-        <input ngModel class="form-control" placeholder="where('x').eq('5').limit(20)" required>
+        <form class="form-inline" (submit)="runQuery()">
+          <div class="input-group input-group-sm full-width">
+            <input ngModel class="form-control" name="conditions" [(ngModel)]="conditionsStr" placeholder="{ filter }">
+          </div>
+          <div class="input-group input-group-sm full-width">
+            <input ngModel class="form-control" name="options" [(ngModel)]="optionsStr" placeholder="{ options }">
+          </div>
+          <button type="submit" class="btn btn-xs btn-primary"><i class="nb-arrow-dropright"></i></button>
+          <button type="button" class="btn btn-xs btn-success" (click)="showNewCompound()"><i class="nb-plus"></i></button>
+        </form>
       </nb-card-body>
-    </nb-card -->
+    </nb-card>
     <nb-card>
       <nb-card-body>
         <div *ngFor="let compound of compounds">
           <chem-bson-editor [data]="compound" (onSave)="onCompoundSave($event)" (onRemove)="onCompoundRemove($event)">
-
           </chem-bson-editor>
         </div>
       </nb-card-body>

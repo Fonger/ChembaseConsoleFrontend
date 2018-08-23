@@ -15,11 +15,13 @@ export class BeakerComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private compoundService: CompoundService,
-  ) {}
+  ) { }
 
   protected lab?: Lab;
   protected beaker?: Beaker
   protected compounds: any[];
+  protected conditionsStr: string
+  protected optionsStr: string
 
   ngOnInit() {
     this.lab = this.route.parent.parent.snapshot.data.lab;
@@ -49,6 +51,10 @@ export class BeakerComponent implements OnInit {
       .pipe(catchError(error => of($event.old)))
       .subscribe(compound => {
         this.compounds = this.compounds.map(data => {
+          if (data._id === compound.__generatedFromNewId) {
+            delete compound.__generatedFromNewId
+            return compound
+          }
           if (compound._id.equals(data._id)) {
             return compound
           }
@@ -64,5 +70,16 @@ export class BeakerComponent implements OnInit {
       }, error => {
         console.error(error)
       })
+  }
+  runQuery() {
+    if (this.conditionsStr === '') this.conditionsStr = '{}'
+    if (this.optionsStr === '') this.optionsStr = '{}'
+    this.compoundService.queryCompounds(this.lab, this.beaker, this.conditionsStr, this.optionsStr).subscribe(compounds => {
+      this.compounds = compounds
+    })
+  }
+  newIndex = 0
+  showNewCompound() {
+    this.compounds.unshift({ _id: `NEW(${++this.newIndex})` })
   }
 }

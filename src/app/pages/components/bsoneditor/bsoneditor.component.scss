@@ -46,8 +46,15 @@
     table {
       border-spacing: 0;
     }
+
     div.bsoneditor-tree table.bsoneditor-tree {
-      margin: 0;
+      margin: 0 0 200px;
+    }
+    /* view mode: no bottom margin */
+    .bsoneditor-mode-view {
+      div.bsoneditor-tree table.bsoneditor-tree {
+        margin: 0;
+      }
     }
     div.bsoneditor-contextmenu ul li button.bsoneditor-selected,
     div.bsoneditor-contextmenu ul li button.bsoneditor-selected:hover,

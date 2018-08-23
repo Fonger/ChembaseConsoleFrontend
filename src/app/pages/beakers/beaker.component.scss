@@ -3,6 +3,14 @@
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 @include nb-install-component() {
+  .form-inline > * {
+    @include nb-ltr(margin, 0 0.5rem 0 0);
+    @include nb-rtl(margin, 0 0 0 0.5rem);
+  }
+  .full-width {
+    flex: 1;
+    min-width: 180px;
+  }
   .header {
     display: flex;
     flex-wrap: wrap;
