@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
-import { LabService } from '../../@core/data/lab.service';
-import { EmailAuth, LdapAuth, Lab, LabUser, EmailTemplate } from '../../@core/data/lab';
-import * as cloneDeep from 'clone-deep';
-import { Deferred } from 'q';
-import { DataSource } from 'ng2-smart-table/lib/data-source/data-source';
-import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component';
-import { Subscription } from 'rxjs';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core'
+import { LabService } from '../../@core/data/lab.service'
+import { EmailAuth, LdapAuth, Lab, LabUser, EmailTemplate } from '../../@core/data/lab'
+import * as cloneDeep from 'clone-deep'
+import { Deferred } from 'q'
+import { DataSource } from 'ng2-smart-table/lib/data-source/data-source'
+import { LabUserIdEditorComponent, LdapUserNameRenderComponent } from './lab-user-cell.component'
+import { Subscription } from 'rxjs'
+import { NgForm } from '@angular/forms'
 
 @Component({
   selector: 'chem-authentication',
@@ -35,7 +35,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
         })
         this.firstInit = false
       }
-    });
+    })
   }
   ngOnDestroy() {
     this.subscription.unsubscribe()
@@ -114,7 +114,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
         renderComponent: LdapUserNameRenderComponent,
       },
     },
-  };
+  }
   onCreateUser(event: LabUserEvent) {
     if (event.newData.method === 'email') {
       const password = prompt('Please enter password for this user')
@@ -141,7 +141,7 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
         },
       )
     } else {
-      event.confirm.reject(null);
+      event.confirm.reject(null)
     }
   }
   onEditUser(event: LabUserEvent) {
@@ -207,25 +207,25 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
 
   insertVerifyContentText(template: EmailTemplate, text: string) {
     const el = this.verifyContentEl.nativeElement
-    const pos = el.selectionStart || 0;
+    const pos = el.selectionStart || 0
     el.value = el.value.substr(0, pos) + text + el.value.substr(pos)
     el.focus()
     el.setSelectionRange(pos, pos + text.length)
-    el.dispatchEvent(new Event('input'));
+    el.dispatchEvent(new Event('input'))
   }
   insertResetContentText(template: EmailTemplate, text: string) {
     const el = this.resetContentEl.nativeElement
-    const pos = el.selectionStart || 0;
+    const pos = el.selectionStart || 0
     el.value = el.value.substr(0, pos) + text + el.value.substr(pos)
     el.focus()
     el.setSelectionRange(pos, pos + text.length)
-    el.dispatchEvent(new Event('input'));
+    el.dispatchEvent(new Event('input'))
   }
 }
 
 interface LabUserEvent {
-  confirm: Deferred<LabUser>;
-  data: LabUser;
-  newData?: LabUser;
+  confirm: Deferred<LabUser>
+  data: LabUser
+  newData?: LabUser
   source: DataSource
 }

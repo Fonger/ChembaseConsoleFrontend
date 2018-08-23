@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { Resolve, RouterStateSnapshot,
-         ActivatedRouteSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { LabService } from '../@core/data/lab.service';
-import { Lab } from '../@core/data/lab';
+         ActivatedRouteSnapshot } from '@angular/router'
+import { Observable } from 'rxjs'
+import { map, take } from 'rxjs/operators'
+import { LabService } from '../@core/data/lab.service'
+import { Lab } from '../@core/data/lab'
 
 @Injectable()
 export class LabListResolver implements Resolve<Partial<Lab>[]> {
@@ -15,11 +15,11 @@ export class LabListResolver implements Resolve<Partial<Lab>[]> {
       take(1),
       map(labs => {
         if (labs.length > 0) {
-          return labs;
+          return labs
         } else {
-          return null;
+          return null
         }
       }),
-    );
+    )
   }
 }

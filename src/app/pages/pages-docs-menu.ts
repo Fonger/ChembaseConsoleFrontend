@@ -1,4 +1,4 @@
-import { NbMenuItem } from '@nebular/theme';
+import { NbMenuItem } from '@nebular/theme'
 
 export const DOCS_MENU_ITEMS: NbMenuItem[] = [
   {
@@ -37,4 +37,4 @@ export const DOCS_MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
-];
+]

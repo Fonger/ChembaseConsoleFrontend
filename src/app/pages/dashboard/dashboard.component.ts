@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Lab, LabStats } from '../../@core/data/lab';
-import { Subscription } from '../../../../node_modules/rxjs';
-import { LabService } from '../../@core/data/lab.service';
-import { NbThemeService } from '@nebular/theme';
-import { delay } from 'rxjs/operators';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Lab, LabStats } from '../../@core/data/lab'
+import { Subscription } from '../../../../node_modules/rxjs'
+import { LabService } from '../../@core/data/lab.service'
+import { NbThemeService } from '@nebular/theme'
+import { delay } from 'rxjs/operators'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 enum OriginOperation { Create, Edit, Delete }
 
@@ -20,13 +20,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private theme: NbThemeService,
     private modalService: NgbModal,
   ) {}
-  lab?: Lab;
-  labStats?: LabStats;
-  subscription: Subscription;
-  themeSubscription = new Subscription();
-  newName?: string;
-  fsOption = {};
-  quotaOption = {};
+  lab?: Lab
+  labStats?: LabStats
+  subscription: Subscription
+  themeSubscription = new Subscription()
+  newName?: string
+  fsOption = {}
+  quotaOption = {}
   originTableSettings = {
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
@@ -52,10 +52,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         filter: false,
       },
     },
-  };
+  }
   allowOrigins: { origin: string }[] = []
   SDK_USAGE: string
-  value = 0;
+  value = 0
   ngOnInit() {
     this.subscription = this.labService.getCurrentLab().subscribe(lab => {
       this.lab = lab
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         + '<script>\n'
         + `var lab = Chembase.Lab('${lab.id}')\n`
         + `</script>\n`
-    });
+    })
   }
   ngOnDestroy() {
     this.subscription.unsubscribe()
@@ -127,7 +127,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setupChart(percent: number, target: 'fsOption' | 'quotaOption') {
     this.themeSubscription.add(this.theme.getJsTheme().pipe(delay(1)).subscribe(config => {
-      const solarTheme: any = config.variables.solar;
+      const solarTheme: any = config.variables.solar
       this[target] = Object.assign({}, {
         tooltip: {
           trigger: 'item',
@@ -257,7 +257,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             ],
           },
         ],
-      });
+      })
     }))
   }
 

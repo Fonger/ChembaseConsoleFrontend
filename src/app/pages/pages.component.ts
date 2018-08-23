@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme';
+import { Component, OnInit } from '@angular/core'
+import { NbMenuItem } from '@nebular/theme'
 
-import { DOCS_MENU_ITEMS } from './pages-docs-menu';
-import { LabService } from '../@core/data/lab.service';
-import { Lab } from '../@core/data/lab';
+import { DOCS_MENU_ITEMS } from './pages-docs-menu'
+import { LabService } from '../@core/data/lab.service'
+import { Lab } from '../@core/data/lab'
 
 @Component({
   selector: 'chem-no-labs',
@@ -68,7 +68,7 @@ export class PagesComponent implements OnInit {
           hidden: true,
         },
         ...DOCS_MENU_ITEMS,
-      ];
+      ]
       this.beakerMenu.children = lab.beakers.map(beaker => {
         return {
           title: beaker.id,
@@ -84,13 +84,13 @@ export class PagesComponent implements OnInit {
             },
           ],
         }
-      });
+      })
       this.beakerMenu.children.push({
         title: 'Create Beaker',
         link: 'createbeaker',
-      });
+      })
       this.menu[3].hidden = false
       this.menu[4].hidden = false
-    });
+    })
   }
 }

@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DefaultEditor, ViewCell } from 'ng2-smart-table';
-import { LabUser } from '../../@core/data/lab';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input } from '@angular/core'
+import { DefaultEditor, ViewCell } from 'ng2-smart-table'
+import { LabUser } from '../../@core/data/lab'
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   template: `
@@ -71,23 +71,23 @@ export class LdapModalContentComponent {
   `,
 })
 export class LdapUserNameRenderComponent implements ViewCell, OnInit {
-  ldapUserName: string;
-  showInfoBtn: boolean;
-  @Input() value: string;
-  @Input() rowData: LabUser;
+  ldapUserName: string
+  showInfoBtn: boolean
+  @Input() value: string
+  @Input() rowData: LabUser
 
   constructor(private modalService: NgbModal) {}
 
   ngOnInit() {
-    this.ldapUserName = this.value.toString();
+    this.ldapUserName = this.value.toString()
     this.showInfoBtn = this.value && this.ldapUserName !== ''
   }
 
   showInfo($event: Event) {
     event.preventDefault()
     const modalRef = this.modalService.open(LdapModalContentComponent, { size: 'lg', container: 'nb-layout' })
-    modalRef.componentInstance.title = `LDAP User: ${this.ldapUserName}`;
-    modalRef.componentInstance.value = this.rowData.info;
+    modalRef.componentInstance.title = `LDAP User: ${this.ldapUserName}`
+    modalRef.componentInstance.value = this.rowData.info
   }
 
 }

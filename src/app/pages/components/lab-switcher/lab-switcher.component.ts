@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Lab } from '../../../@core/data/lab';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core'
+import { Lab } from '../../../@core/data/lab'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'chem-lab-switcher',
@@ -12,14 +12,14 @@ export class LabSwitcherComponent implements OnInit {
     this.labs = []
   }
 
-  labs: Partial<Lab>[];
-  lab?: Lab;
+  labs: Partial<Lab>[]
+  lab?: Lab
 
   ngOnInit() {
     this.route.data
       .subscribe((data: { labs?: Partial<Lab>[], lab?: Lab }) => {
         if (data.labs) this.labs = data.labs
         if (data.lab) this.lab = data.lab
-      });
+      })
   }
 }

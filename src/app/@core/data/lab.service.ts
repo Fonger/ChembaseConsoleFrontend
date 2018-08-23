@@ -1,16 +1,16 @@
 
-import { Observable, ReplaySubject } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Lab, LabUser, LabStats } from './lab';
-import { environment } from '../../../environments/environment';
+import { Observable, ReplaySubject } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { Lab, LabUser, LabStats } from './lab'
+import { environment } from '../../../environments/environment'
 
-export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; };
+export type DeepPartial<T> = { [P in keyof T]?: DeepPartial<T[P]>; }
 
 @Injectable()
 export class LabService {
   constructor(private http: HttpClient) {}
-  private labSubject = new ReplaySubject<Lab>(1);
+  private labSubject = new ReplaySubject<Lab>(1)
 
   getLabs(): Observable<Partial<Lab>[]> {
     return this.http.get<Partial<Lab>[]>(`${environment.apiBaseUri}/api/v1/admin/labs`)

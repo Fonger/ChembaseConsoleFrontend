@@ -1,10 +1,10 @@
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Lab } from './lab';
-import { Beaker } from './beaker';
-import { DeepPartial } from './lab.service';
-import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { Lab } from './lab'
+import { Beaker } from './beaker'
+import { DeepPartial } from './lab.service'
+import { environment } from '../../../environments/environment'
 
 @Injectable()
 export class BeakerService {

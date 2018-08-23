@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { ThemeModule } from '../../@theme/theme.module';
-import { AuthenticationComponent } from './authentication.component';
-import { FormsModule } from '@angular/forms';
-import { LabUserIdEditorComponent, LdapUserNameRenderComponent, LdapModalContentComponent } from './lab-user-cell.component';
+import { NgModule } from '@angular/core'
+import { Ng2SmartTableModule } from 'ng2-smart-table'
+import { ThemeModule } from '../../@theme/theme.module'
+import { AuthenticationComponent } from './authentication.component'
+import { FormsModule } from '@angular/forms'
+import { LabUserIdEditorComponent, LdapUserNameRenderComponent, LdapModalContentComponent } from './lab-user-cell.component'
 
 @NgModule({
   imports: [

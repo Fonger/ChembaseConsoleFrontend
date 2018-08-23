@@ -1,7 +1,7 @@
-import { Component, Input, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output, OnDestroy  } from '@angular/core';
-import * as BSONEditor from 'bsoneditor';
+import { Component, Input, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output, OnDestroy  } from '@angular/core'
+import * as BSONEditor from 'bsoneditor'
 import * as bson from 'bson'
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs'
 const BSON = new bson()
 
 @Component({
@@ -11,11 +11,11 @@ const BSON = new bson()
 })
 export class BSONEditorComponent implements AfterViewInit, OnDestroy  {
   @ViewChild('bsoneditor')
-  editorElement: ElementRef;
+  editorElement: ElementRef
 
   editor: BSONEditor
   private _data = new BehaviorSubject<any>(null)
-  private subscription?: Subscription;
+  private subscription?: Subscription
 
   @Input()
   set data(data: any) {
@@ -24,8 +24,8 @@ export class BSONEditorComponent implements AfterViewInit, OnDestroy  {
   get data() {
     return this._data.value
   }
-  @Output() onSave = new EventEmitter<{error?: Error, result?: any, old?: any}>();
-  @Output() onRemove = new EventEmitter<any>();
+  @Output() onSave = new EventEmitter<{error?: Error, result?: any, old?: any}>()
+  @Output() onRemove = new EventEmitter<any>()
 
   ngAfterViewInit() {
     const options = {
@@ -53,8 +53,8 @@ export class BSONEditorComponent implements AfterViewInit, OnDestroy  {
         }
         return true
       },
-    };
-    this.editor = new BSONEditor(this.editorElement.nativeElement, options);
+    }
+    this.editor = new BSONEditor(this.editorElement.nativeElement, options)
     this.subscription = this._data.subscribe(data => {
       this.editor.set(data)
       this.editor.setName('Compound {' + data._id.toString() + '}')

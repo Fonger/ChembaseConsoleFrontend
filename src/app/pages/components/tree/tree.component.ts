@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'chem-tree',
@@ -28,6 +28,6 @@ export class TreeComponent {
         name: 'Lua',
       }],
     }],
-  }];
+  }]
 
 }

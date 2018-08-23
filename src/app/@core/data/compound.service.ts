@@ -1,13 +1,13 @@
 
 
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Lab } from './lab';
-import { Beaker } from './beaker';
-import { map } from 'rxjs/operators';
-import * as EJSON from 'mongodb-extjson';
-import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs'
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { Lab } from './lab'
+import { Beaker } from './beaker'
+import { map } from 'rxjs/operators'
+import * as EJSON from 'mongodb-extjson'
+import { environment } from '../../../environments/environment'
 
 @Injectable()
 export class CompoundService {
@@ -20,14 +20,14 @@ export class CompoundService {
   }
 
   createCompound(lab: Lab, beaker: Beaker, compound: any): Observable<any> {
-    compound = { compound: EJSON.stringify(compound) };
+    compound = { compound: EJSON.stringify(compound) }
     return this.http
       .post<any>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds`, compound)
       .pipe(map(data => EJSON.parse(data.compound, { strict: false })))
   }
 
   updateCompound(lab: Lab, beaker: Beaker, compoundId: string, update: any): Observable<any> {
-    update = { update: EJSON.stringify(update) };
+    update = { update: EJSON.stringify(update) }
     return this.http
       .patch<any>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/beakers/${beaker.id}/compounds/${compoundId}`, update)
       .pipe(map(data => EJSON.parse(data.compound, { strict: false })))

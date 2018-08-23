@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import { NbThemeService, NbPopoverDirective } from '@nebular/theme';
-import { AnalyticsService } from '../../../../@core/utils/analytics.service';
-import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
+import {Component, Input} from '@angular/core'
+import { NbThemeService, NbPopoverDirective } from '@nebular/theme'
+import { AnalyticsService } from '../../../../@core/utils/analytics.service'
+import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options'
 
 @Component({
   selector: 'chem-theme-switcher-list',
@@ -19,9 +19,9 @@ import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.option
 })
 export class ThemeSwitcherListComponent {
 
-  @Input() popover: NbPopoverDirective;
+  @Input() popover: NbPopoverDirective
 
-  theme: NbJSThemeOptions;
+  theme: NbJSThemeOptions
 
   themes = [
     {
@@ -36,7 +36,7 @@ export class ThemeSwitcherListComponent {
       title: 'Corporate',
       key: 'corporate',
     },
-  ];
+  ]
 
   constructor(
     private themeService: NbThemeService,
@@ -44,8 +44,8 @@ export class ThemeSwitcherListComponent {
   ) {}
 
   onToggleTheme(themeKey: string) {
-    this.themeService.changeTheme(themeKey);
-    this.analyticsService.trackEvent('switchTheme');
-    this.popover.hide();
+    this.themeService.changeTheme(themeKey)
+    this.analyticsService.trackEvent('switchTheme')
+    this.popover.hide()
   }
 }

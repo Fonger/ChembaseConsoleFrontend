@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core'
 
-import { NbMenuService, NbSidebarService, NbMenuItem } from '@nebular/theme';
-import { AnalyticsService } from '../../../@core/utils/analytics.service';
-import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
+import { NbMenuService, NbSidebarService, NbMenuItem } from '@nebular/theme'
+import { AnalyticsService } from '../../../@core/utils/analytics.service'
+import { NbAuthService, NbAuthJWTToken } from '@nebular/auth'
 
 @Component({
   selector: 'chem-header',
@@ -12,16 +12,16 @@ import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 export class HeaderComponent implements OnInit {
 
 
-  @Input() position = 'normal';
+  @Input() position = 'normal'
 
-  user: any;
+  user: any
 
   userMenu: NbMenuItem[] = [
     {
       title: 'Log out',
       link: '/auth/logout',
     },
-  ];
+  ]
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     this.authService.onTokenChange()
     .subscribe((token: NbAuthJWTToken) => {
       if (token.isValid()) {
-        this.user = token.getPayload();
+        this.user = token.getPayload()
       }
     })
   }
@@ -42,20 +42,20 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
+    this.sidebarService.toggle(true, 'menu-sidebar')
+    return false
   }
 
   toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
-    return false;
+    this.sidebarService.toggle(false, 'settings-sidebar')
+    return false
   }
 
   goToHome() {
-    this.menuService.navigateHome();
+    this.menuService.navigateHome()
   }
 
   startSearch() {
-    this.analyticsService.trackEvent('startSearch');
+    this.analyticsService.trackEvent('startSearch')
   }
 }

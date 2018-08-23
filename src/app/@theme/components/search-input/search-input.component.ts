@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core'
 
 @Component({
   selector: 'chem-search-input',
@@ -14,22 +14,22 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
   `,
 })
 export class SearchInputComponent {
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input') input: ElementRef
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() search: EventEmitter<string> = new EventEmitter<string>()
 
-  isInputShown = false;
+  isInputShown = false
 
   showInput() {
-    this.isInputShown = true;
-    this.input.nativeElement.focus();
+    this.isInputShown = true
+    this.input.nativeElement.focus()
   }
 
   hideInput() {
-    this.isInputShown = false;
+    this.isInputShown = false
   }
 
   onInput(val: string) {
-    this.search.emit(val);
+    this.search.emit(val)
   }
 }

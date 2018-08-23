@@ -83,4 +83,4 @@ export const CORPORATE_THEME = {
       textColor: '#484848',
     },
   },
-};
+}

@@ -1,7 +1,7 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModuleWithProviders, NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import {
   NbActionsModule,
@@ -20,9 +20,9 @@ import {
   NbAlertModule,
   NbInputModule,
   NbButtonModule,
-} from '@nebular/theme';
+} from '@nebular/theme'
 
-import { NbSecurityModule } from '@nebular/security';
+import { NbSecurityModule } from '@nebular/security'
 
 import {
   FooterComponent,
@@ -33,26 +33,26 @@ import {
   LayoutDirectionSwitcherComponent,
   ThemeSwitcherComponent,
   ThemeSwitcherListComponent,
-} from './components';
+} from './components'
 
-import { LabSwitcherComponent } from '../pages/components/lab-switcher/lab-switcher.component';
+import { LabSwitcherComponent } from '../pages/components/lab-switcher/lab-switcher.component'
 
-import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, BytesPipe } from './pipes';
+import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, BytesPipe } from './pipes'
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
-} from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
-import { COSMIC_THEME } from './styles/theme.cosmic';
-import { CORPORATE_THEME } from './styles/theme.corporate';
-import { RouterModule } from '@angular/router';
-import { ChemLoginComponent } from './components/auth/login/login.comonent';
-import { ChemAuthBlockComponent } from './components/auth/auth-block/auth-block.component';
-import { ChemAuthComponent } from './components/auth/auth.component';
+} from './layouts'
+import { DEFAULT_THEME } from './styles/theme.default'
+import { COSMIC_THEME } from './styles/theme.cosmic'
+import { CORPORATE_THEME } from './styles/theme.corporate'
+import { RouterModule } from '@angular/router'
+import { ChemLoginComponent } from './components/auth/login/login.comonent'
+import { ChemAuthBlockComponent } from './components/auth/auth-block/auth-block.component'
+import { ChemAuthComponent } from './components/auth/auth.component'
 
-const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, RouterModule];
+const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
 
 const NB_MODULES = [
   NbCardModule,
@@ -72,7 +72,7 @@ const NB_MODULES = [
   NbAlertModule,
   NbInputModule,
   NbButtonModule,
-];
+]
 
 const COMPONENTS = [
   SwitcherComponent,
@@ -91,11 +91,11 @@ const COMPONENTS = [
   ChemAuthComponent,
   ChemLoginComponent,
   ChemAuthBlockComponent,
-];
+]
 
 const ENTRY_COMPONENTS = [
   ThemeSwitcherListComponent,
-];
+]
 
 const PIPES = [
   CapitalizePipe,
@@ -103,7 +103,7 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   BytesPipe,
-];
+]
 
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
@@ -114,7 +114,7 @@ const NB_THEME_PROVIDERS = [
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
-];
+]
 
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
@@ -127,6 +127,6 @@ export class ThemeModule {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
       providers: [...NB_THEME_PROVIDERS],
-    };
+    }
   }
 }

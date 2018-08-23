@@ -1,18 +1,18 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { StateService } from './state.service';
-import { LabService } from './lab.service';
-import { TokenInterceptor } from '../utils/token.interceptor';
-import { BeakerService } from './beaker.service';
-import { CompoundService } from './compound.service';
+import { NgModule, ModuleWithProviders } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import { StateService } from './state.service'
+import { LabService } from './lab.service'
+import { TokenInterceptor } from '../utils/token.interceptor'
+import { BeakerService } from './beaker.service'
+import { CompoundService } from './compound.service'
 
 const SERVICES = [
   StateService,
   LabService,
   BeakerService,
   CompoundService,
-];
+]
 
 @NgModule({
   imports: [
@@ -34,6 +34,6 @@ export class DataModule {
           multi: true,
         },
       ],
-    };
+    }
   }
 }

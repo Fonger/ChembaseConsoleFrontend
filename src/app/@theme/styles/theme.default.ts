@@ -85,4 +85,4 @@ export const DEFAULT_THEME = {
       textColor: '#484848',
     },
   },
-};
+}

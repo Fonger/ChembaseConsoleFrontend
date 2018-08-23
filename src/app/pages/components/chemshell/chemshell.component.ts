@@ -1,14 +1,14 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, OnInit  } from '@angular/core';
-import { Terminal, ITerminalOptions, ITheme } from 'xterm';
-import { fit as termFit } from 'xterm/lib/addons/fit/fit';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, OnInit  } from '@angular/core'
+import { Terminal, ITerminalOptions, ITheme } from 'xterm'
+import { fit as termFit } from 'xterm/lib/addons/fit/fit'
 
-import * as io from 'socket.io-client';
-import { NbAuthService } from '@nebular/auth';
-import { Lab } from '../../../@core/data/lab';
-import { ActivatedRoute } from '@angular/router';
-import { NbThemeService } from '@nebular/theme';
-import { Subscription } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import * as io from 'socket.io-client'
+import { NbAuthService } from '@nebular/auth'
+import { Lab } from '../../../@core/data/lab'
+import { ActivatedRoute } from '@angular/router'
+import { NbThemeService } from '@nebular/theme'
+import { Subscription } from 'rxjs'
+import { environment } from '../../../../environments/environment'
 
 @Component({
   selector: 'chem-shell',
@@ -17,7 +17,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
   @ViewChild('chemshell')
-  shellElement: ElementRef;
+  shellElement: ElementRef
 
   term: Terminal
   socket: SocketIOClient.Socket
@@ -93,7 +93,7 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
       this.term.setOption('theme', config.name === 'cosmic' ? this.darkTheme : this.lightTheme)
     })
 
-    this.lab = this.route.parent.snapshot.data.lab;
+    this.lab = this.route.parent.snapshot.data.lab
     this.authService.getToken().subscribe(token => {
       this.token = token.getValue()
     })

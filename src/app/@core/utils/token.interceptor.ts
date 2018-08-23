@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-} from '@angular/common/http';
+} from '@angular/common/http'
 
-import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
-import { Observable } from 'rxjs/Observable';
+import { NbAuthService, NbAuthJWTToken } from '@nebular/auth'
+import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -16,9 +16,9 @@ export class TokenInterceptor implements HttpInterceptor {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
         if (token.isValid()) {
-          this.token = token.getValue();
+          this.token = token.getValue()
         }
-      });
+      })
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -26,7 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
       setHeaders: {
         Authorization: `Bearer ${this.token}`,
       },
-    });
-    return next.handle(request);
+    })
+    return next.handle(request)
   }
 }

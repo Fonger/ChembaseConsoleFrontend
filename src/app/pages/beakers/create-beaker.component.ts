@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { BeakerService } from '../../@core/data/beaker.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Lab } from '../../@core/data/lab';
-import { LabService } from '../../@core/data/lab.service';
+import { Component, OnInit } from '@angular/core'
+import { NgForm } from '@angular/forms'
+import { BeakerService } from '../../@core/data/beaker.service'
+import { Router, ActivatedRoute } from '@angular/router'
+import { Lab } from '../../@core/data/lab'
+import { LabService } from '../../@core/data/lab.service'
 
 @Component({
   selector: 'chem-create-beaker',
@@ -18,7 +18,7 @@ export class CreateBeakerComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-  lab: Lab;
+  lab: Lab
 
   ngOnInit() {
     this.lab = this.route.parent.snapshot.data.lab

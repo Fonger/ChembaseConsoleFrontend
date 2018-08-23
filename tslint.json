@@ -73,7 +73,10 @@
       "single"
     ],
     "radix": true,
-    "semicolon": false,
+    "semicolon": [
+      true,
+      "never"
+    ],
     "triple-equals": [
       true,
       "allow-null-check"

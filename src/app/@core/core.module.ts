@@ -1,26 +1,26 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf, Injectable } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken, NbAuthService } from '@nebular/auth';
-import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators/map';
-import { throwIfAlreadyLoaded } from './module-import-guard';
-import { DataModule } from './data/data.module';
-import { AnalyticsService } from './utils/analytics.service';
-import { environment } from '../../environments/environment';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf, Injectable } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken, NbAuthService } from '@nebular/auth'
+import { NbSecurityModule, NbRoleProvider } from '@nebular/security'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators/map'
+import { throwIfAlreadyLoaded } from './module-import-guard'
+import { DataModule } from './data/data.module'
+import { AnalyticsService } from './utils/analytics.service'
+import { environment } from '../../environments/environment'
 
 @Injectable()
 export class NbSimpleRoleProvider extends NbRoleProvider {
   constructor(private authService: NbAuthService) {
-    super();
+    super()
   }
   getRole(): Observable<string> {
     return this.authService.onTokenChange()
       .pipe(
         map((token: NbAuthJWTToken) => {
-          return token.isValid() ? token.getPayload()['role'] : 'guest';
+          return token.isValid() ? token.getPayload()['role'] : 'guest'
         }),
-      );
+      )
   }
 }
 
@@ -79,7 +79,7 @@ export const NB_CORE_PROVIDERS = [
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,
   },
   AnalyticsService,
-];
+]
 
 @NgModule({
   imports: [
@@ -92,7 +92,7 @@ export const NB_CORE_PROVIDERS = [
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+    throwIfAlreadyLoaded(parentModule, 'CoreModule')
   }
 
   static forRoot(): ModuleWithProviders {
@@ -101,6 +101,6 @@ export class CoreModule {
       providers: [
         ...NB_CORE_PROVIDERS,
       ],
-    };
+    }
   }
 }

@@ -84,4 +84,4 @@ export const COSMIC_THEME = {
       textColor: '#ffffff',
     },
   },
-};
+}
