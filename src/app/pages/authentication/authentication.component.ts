@@ -15,10 +15,10 @@ import { NgForm } from '@angular/forms';
 })
 export class AuthenticationComponent implements OnInit, OnDestroy {
   constructor(private labService: LabService) {}
-  protected emailAuth: EmailAuth
-  protected ldapAuth: LdapAuth
-  protected lab?: Lab
-  protected labUsers: LabUser[] = []
+  emailAuth: EmailAuth
+  ldapAuth: LdapAuth
+  lab?: Lab
+  labUsers: LabUser[] = []
   private subscription: Subscription
   private firstInit = true
   readonly VERIFY_ID = '{{VERIFY_ID}}'

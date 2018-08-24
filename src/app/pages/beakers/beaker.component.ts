@@ -17,11 +17,11 @@ export class BeakerComponent implements OnInit {
     private compoundService: CompoundService,
   ) { }
 
-  protected lab?: Lab;
-  protected beaker?: Beaker
-  protected compounds: any[];
-  protected conditionsStr: string
-  protected optionsStr: string
+  lab?: Lab;
+  beaker?: Beaker
+  compounds: any[];
+  conditionsStr: string
+  optionsStr: string
 
   ngOnInit() {
     this.lab = this.route.parent.parent.snapshot.data.lab;

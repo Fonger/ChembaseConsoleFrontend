@@ -5,4 +5,5 @@
  */
 export const environment = {
   production: true,
+  apiBaseUri: 'https://chembase.cs.nctu.edu.tw:8080',
 };
