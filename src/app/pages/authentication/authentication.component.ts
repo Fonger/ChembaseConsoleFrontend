@@ -15,30 +15,30 @@ import { NgForm } from '@angular/forms';
 })
 export class AuthenticationComponent implements OnInit, OnDestroy {
   constructor(private labService: LabService) {}
-  protected emailAuth: EmailAuth
-  protected ldapAuth: LdapAuth
-  protected lab?: Lab
-  protected labUsers: LabUser[] = []
-  private subscription: Subscription
-  private firstInit = true
-  readonly VERIFY_ID = '{{VERIFY_ID}}'
-  readonly VERIFY_CODE = '{{VERIFY_CODE}}'
+  protected emailAuth: EmailAuth;
+  protected ldapAuth: LdapAuth;
+  protected lab?: Lab;
+  protected labUsers: LabUser[] = [];
+  private subscription: Subscription;
+  private firstInit = true;
+  readonly VERIFY_ID = '{{VERIFY_ID}}';
+  readonly VERIFY_CODE = '{{VERIFY_CODE}}';
 
   ngOnInit() {
     this.subscription = this.labService.getCurrentLab().subscribe(lab => {
-      this.lab = lab
-      this.emailAuth = cloneDeep(lab.auth.email)
-      this.ldapAuth = cloneDeep(lab.auth.ldap)
+      this.lab = lab;
+      this.emailAuth = cloneDeep(lab.auth.email);
+      this.ldapAuth = cloneDeep(lab.auth.ldap);
       if (this.firstInit) {
         this.labService.getLabUsers(lab).subscribe(labUsers => {
-          this.labUsers = labUsers
-        })
-        this.firstInit = false
+          this.labUsers = labUsers;
+        });
+        this.firstInit = false;
       }
     });
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe();
   }
   settings = {
     add: {
@@ -117,29 +117,29 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   };
   onCreateUser(event: LabUserEvent) {
     if (event.newData.method === 'email') {
-      const password = prompt('Please enter password for this user')
-      if (!password) return event.confirm.reject(null)
-      event.newData.password = password
+      const password = prompt('Please enter password for this user');
+      if (!password) return event.confirm.reject(null);
+      event.newData.password = password;
     }
     this.labService.createLabUser(this.lab, event.newData).subscribe(
       data => {
-        event.confirm.resolve(data)
+        event.confirm.resolve(data);
       },
       error => {
-        event.confirm.reject(null)
+        event.confirm.reject(null);
       },
-    )
+    );
   }
   onDeleteUser(event: LabUserEvent) {
     if (window.confirm('Are you sure you want to delete this user?')) {
       this.labService.deleteLabUser(this.lab, event.data).subscribe(
         value => {
-          event.confirm.resolve()
+          event.confirm.resolve();
         },
         error => {
-          event.confirm.reject(null)
+          event.confirm.reject(null);
         },
-      )
+      );
     } else {
       event.confirm.reject(null);
     }
@@ -147,78 +147,78 @@ export class AuthenticationComponent implements OnInit, OnDestroy {
   onEditUser(event: LabUserEvent) {
     this.labService.updateLabUser(this.lab, event.newData).subscribe(
       data => {
-        event.confirm.resolve(data)
+        event.confirm.resolve(data);
       },
       error => {
-        event.confirm.reject(undefined)
+        event.confirm.reject(undefined);
       },
-    )
+    );
   }
   onSubmitEmail($event: Event) {
-    $event.preventDefault()
+    $event.preventDefault();
     this.labService.updateLab(this.lab.id, {
       auth: {
         email: this.emailAuth,
       },
     }).subscribe(lab => {
-      this.labService.setCurrentLab(lab)
-    })
+      this.labService.setCurrentLab(lab);
+    });
   }
   onSubmitLdap($event: Event) {
-    $event.preventDefault()
+    $event.preventDefault();
     this.labService.updateLab(this.lab.id, {
       auth: {
         ldap: this.ldapAuth,
       },
     }).subscribe(lab => {
-      this.labService.setCurrentLab(lab)
-    })
+      this.labService.setCurrentLab(lab);
+    });
   }
   onSaveVerifyTemplate(form: NgForm) {
-    this.emailAuth.template.verify = form.value
+    this.emailAuth.template.verify = form.value;
     this.labService.updateLab(this.lab.id, {
       auth: {
         email: this.emailAuth,
       },
     }).subscribe(lab => {
-      this.labService.setCurrentLab(lab)
+      this.labService.setCurrentLab(lab);
     }, error => {
-      console.error(error)
-    })
+      console.error(error);
+    });
   }
   onSaveResetTemplate(form: NgForm) {
-    this.emailAuth.template.reset = form.value
+    this.emailAuth.template.reset = form.value;
     this.labService.updateLab(this.lab.id, {
       auth: {
         email: this.emailAuth,
       },
     }).subscribe(lab => {
-      this.labService.setCurrentLab(lab)
+      this.labService.setCurrentLab(lab);
     }, error => {
-      console.error(error)
-    })
+      console.error(error);
+    });
   }
 
   @ViewChild('verifyContentElement')
-  verifyContentEl: ElementRef
+  verifyContentEl: ElementRef;
 
   @ViewChild('resetContentElement')
-  resetContentEl: ElementRef
+  resetContentEl: ElementRef;
 
   insertVerifyContentText(template: EmailTemplate, text: string) {
-    const el = this.verifyContentEl.nativeElement
+    const el = this.verifyContentEl.nativeElement;
     const pos = el.selectionStart || 0;
-    el.value = el.value.substr(0, pos) + text + el.value.substr(pos)
-    el.focus()
-    el.setSelectionRange(pos, pos + text.length)
+    el.value = el.value.substr(0, pos) + text + el.value.substr(pos);
+    el.focus();
+    el.setSelectionRange(pos, pos + text.length);
     el.dispatchEvent(new Event('input'));
   }
   insertResetContentText(template: EmailTemplate, text: string) {
-    const el = this.resetContentEl.nativeElement
+    const el = this.resetContentEl.nativeElement;
     const pos = el.selectionStart || 0;
-    el.value = el.value.substr(0, pos) + text + el.value.substr(pos)
-    el.focus()
-    el.setSelectionRange(pos, pos + text.length)
+    el.value = el.value.substr(0, pos) + text + el.value.substr(pos);
+    el.focus();
+    el.setSelectionRange(pos, pos + text.length);
     el.dispatchEvent(new Event('input'));
   }
 }
@@ -227,5 +227,5 @@ interface LabUserEvent {
   confirm: Deferred<LabUser>;
   data: LabUser;
   newData?: LabUser;
-  source: DataSource
+  source: DataSource;
 }

@@ -15,11 +15,11 @@ export class LabResolver implements Resolve<Lab> {
 
     return this.labService.getLab(labId).pipe(
       tap(lab => {
-        this.labService.setCurrentLab(lab)
+        this.labService.setCurrentLab(lab);
       }),
       catchError(error => {
         this.router.navigate(['/labs']);
-        return of(null)
+        return of(null);
       }),
     );
   }

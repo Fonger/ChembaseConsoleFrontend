@@ -48,8 +48,8 @@ export class LabUserIdEditorComponent extends DefaultEditor {}
   `,
 })
 export class LdapModalContentComponent {
-  items: any[] = []
-  @Input() title: string
+  items: any[] = [];
+  @Input() title: string;
 
   @Input()
   set value(val: any) {
@@ -58,8 +58,8 @@ export class LdapModalContentComponent {
         key: entry[0],
         value: entry[1],
         class: typeof entry[1] === 'object' ? 'object' : 'non-object',
-      }
-    })
+      };
+    });
   }
 
   constructor(public activeModal: NgbActiveModal) {}
@@ -80,12 +80,12 @@ export class LdapUserNameRenderComponent implements ViewCell, OnInit {
 
   ngOnInit() {
     this.ldapUserName = this.value.toString();
-    this.showInfoBtn = this.value && this.ldapUserName !== ''
+    this.showInfoBtn = this.value && this.ldapUserName !== '';
   }
 
   showInfo($event: Event) {
-    event.preventDefault()
-    const modalRef = this.modalService.open(LdapModalContentComponent, { size: 'lg', container: 'nb-layout' })
+    event.preventDefault();
+    const modalRef = this.modalService.open(LdapModalContentComponent, { size: 'lg', container: 'nb-layout' });
     modalRef.componentInstance.title = `LDAP User: ${this.ldapUserName}`;
     modalRef.componentInstance.value = this.rowData.info;
   }

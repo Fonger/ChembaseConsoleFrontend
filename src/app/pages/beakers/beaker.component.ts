@@ -18,31 +18,31 @@ export class BeakerComponent implements OnInit {
   ) { }
 
   protected lab?: Lab;
-  protected beaker?: Beaker
+  protected beaker?: Beaker;
   protected compounds: any[];
-  protected conditionsStr: string
-  protected optionsStr: string
+  protected conditionsStr: string;
+  protected optionsStr: string;
 
   ngOnInit() {
     this.lab = this.route.parent.parent.snapshot.data.lab;
     this.route.data.subscribe(data => {
-      this.beaker = data.beaker
+      this.beaker = data.beaker;
       this.compoundService.getCompounds(this.lab, data.beaker).subscribe(compounds => {
-        this.compounds = compounds
-      })
-    })
+        this.compounds = compounds;
+      });
+    });
   }
 
   onCompoundSave($event) {
-    if ($event.error) throw $event.error
-    const oldKeys = Object.keys($event.old)
-    const newKeys = Object.keys($event.result)
-    const unsetKeys = oldKeys.filter(oldKey => !newKeys.includes(oldKey))
+    if ($event.error) throw $event.error;
+    const oldKeys = Object.keys($event.old);
+    const newKeys = Object.keys($event.result);
+    const unsetKeys = oldKeys.filter(oldKey => !newKeys.includes(oldKey));
 
     const { _id, __version, ...destObject } = $event.result;
-    const update: any = { $set: destObject }
+    const update: any = { $set: destObject };
     if (unsetKeys.length > 0) {
-      update.$unset = unsetKeys.reduce((unsetObj, key) => ({ ...unsetObj, [key]: 1 }), {})
+      update.$unset = unsetKeys.reduce((unsetObj, key) => ({ ...unsetObj, [key]: 1 }), {});
     }
     const compoundId = $event.result._id.toString();
 
@@ -52,14 +52,14 @@ export class BeakerComponent implements OnInit {
       .subscribe(compound => {
         this.compounds = this.compounds.map(data => {
           if (data._id === compound.__generatedFromNewId) {
-            delete compound.__generatedFromNewId
-            return compound
+            delete compound.__generatedFromNewId;
+            return compound;
           }
           if (compound._id.equals(data._id)) {
-            return compound
+            return compound;
           }
-          return data
-        })
+          return data;
+        });
       });
   }
   onCompoundRemove(compound) {
@@ -68,18 +68,18 @@ export class BeakerComponent implements OnInit {
       .subscribe(deletedCompound => {
         this.compounds = this.compounds.filter(c => !c._id.equals(deletedCompound._id));
       }, error => {
-        console.error(error)
-      })
+        console.error(error);
+      });
   }
   runQuery() {
-    if (this.conditionsStr === '') this.conditionsStr = '{}'
-    if (this.optionsStr === '') this.optionsStr = '{}'
+    if (this.conditionsStr === '') this.conditionsStr = '{}';
+    if (this.optionsStr === '') this.optionsStr = '{}';
     this.compoundService.queryCompounds(this.lab, this.beaker, this.conditionsStr, this.optionsStr).subscribe(compounds => {
-      this.compounds = compounds
-    })
+      this.compounds = compounds;
+    });
   }
-  newIndex = 0
+  newIndex = 0;
   showNewCompound() {
-    this.compounds.unshift({ _id: `NEW(${++this.newIndex})` })
+    this.compounds.unshift({ _id: `NEW(${++this.newIndex})` });
   }
 }

@@ -17,7 +17,7 @@ export class BeakerResolver implements Resolve<Beaker> {
     return this.beakerService.getBeaker(lab, beakerId).pipe(
       catchError(error => {
         this.router.navigate(['/labs/' + lab.id]);
-        return of(null)
+        return of(null);
       }),
     );
   }

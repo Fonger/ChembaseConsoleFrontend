@@ -19,8 +19,8 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
   @ViewChild('chemshell')
   shellElement: ElementRef;
 
-  term: Terminal
-  socket: SocketIOClient.Socket
+  term: Terminal;
+  socket: SocketIOClient.Socket;
 
   lightTheme: ITheme = {
     foreground: '#2a2c33',
@@ -44,7 +44,7 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     brightMagenta: '#950095',
     brightCyan: '#3f953a',
     brightWhite: '#ffffff',
-  }
+  };
 
   darkTheme: ITheme = {
     foreground: '#d0d0d0',
@@ -68,12 +68,12 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     brightMagenta: '#bb88dd',
     brightCyan: '#00ffcc',
     brightWhite: '#d0d0d0',
-  }
+  };
 
   termOptions: ITerminalOptions = {
     allowTransparency: true,
     cursorBlink: true,
-  }
+  };
 
   constructor(
     private authService: NbAuthService,
@@ -81,69 +81,69 @@ export class ChemShellComponent implements AfterViewInit, OnInit, OnDestroy  {
     private theme: NbThemeService,
   ) {}
 
-  private token: String
-  private lab: Lab
-  private themeSubscription: Subscription
+  private token: String;
+  private lab: Lab;
+  private themeSubscription: Subscription;
 
   ngOnInit() {
-    this.term = new Terminal(this.termOptions)
-    this.term.setOption('theme', this.lightTheme)
+    this.term = new Terminal(this.termOptions);
+    this.term.setOption('theme', this.lightTheme);
 
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-      this.term.setOption('theme', config.name === 'cosmic' ? this.darkTheme : this.lightTheme)
-    })
+      this.term.setOption('theme', config.name === 'cosmic' ? this.darkTheme : this.lightTheme);
+    });
 
     this.lab = this.route.parent.snapshot.data.lab;
     this.authService.getToken().subscribe(token => {
-      this.token = token.getValue()
-    })
+      this.token = token.getValue();
+    });
   }
 
   ngAfterViewInit() {
 
-    this.term.open(this.shellElement.nativeElement)
+    this.term.open(this.shellElement.nativeElement);
 
-    termFit(this.term)
-    this.term.focus()
+    termFit(this.term);
+    this.term.focus();
 
     this.socket = io(`${environment.apiBaseUri}/admin`, {
       autoConnect: false,
       transports: ['websocket'],
       upgrade: false,
       query: { token: this.token },
-    })
+    });
     this.socket.on('connecting', () => {
-      this.term.write('\x1b[32mConnecting to Chembase Server...\x1b[m\r\n')
-    })
-    this.socket.connect()
+      this.term.write('\x1b[32mConnecting to Chembase Server...\x1b[m\r\n');
+    });
+    this.socket.connect();
 
     this.term.on('data', (data) => {
-      this.socket.emit('shell', data)
-    })
+      this.socket.emit('shell', data);
+    });
     this.socket.on('shell', (data) => {
-      this.term.write(data)
-    })
+      this.term.write(data);
+    });
     window.addEventListener('resize', () => {
-      termFit(this.term)
-      this.socket.emit('shell-resize', { cols: this.term.cols, rows: this.term.rows })
-    })
+      termFit(this.term);
+      this.socket.emit('shell-resize', { cols: this.term.cols, rows: this.term.rows });
+    });
     this.socket.on('connect', () => {
-      this.term.write('\x1b[32mStarting Chembase Mongo Shell...\x1b[m\r\n')
+      this.term.write('\x1b[32mStarting Chembase Mongo Shell...\x1b[m\r\n');
 
-      setTimeout(() => this.socket.emit('shell-start', { labId: this.lab.id, apiKey: this.lab.apiKey }), 1000)
-    })
+      setTimeout(() => this.socket.emit('shell-start', { labId: this.lab.id, apiKey: this.lab.apiKey }), 1000);
+    });
     this.socket.on('disconnect', (r) => {
-      this.term.write('\r\n\x1b[31mDisconnect from Chembase Mongo Shell.\x1b[m\r\n')
+      this.term.write('\r\n\x1b[31mDisconnect from Chembase Mongo Shell.\x1b[m\r\n');
       if (r === 'io server disconnect') {
-        this.socket.connect()
+        this.socket.connect();
       }
-    })
+    });
   }
   ngOnDestroy() {
     if (this.socket) {
-      this.socket.disconnect()
+      this.socket.disconnect();
     }
-    this.term.dispose()
-    this.themeSubscription.unsubscribe()
+    this.term.dispose();
+    this.themeSubscription.unsubscribe();
   }
 }

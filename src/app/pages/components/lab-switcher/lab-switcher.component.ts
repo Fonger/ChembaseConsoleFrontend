@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LabSwitcherComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
-    this.labs = []
+    this.labs = [];
   }
 
   labs: Partial<Lab>[];
@@ -18,8 +18,8 @@ export class LabSwitcherComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe((data: { labs?: Partial<Lab>[], lab?: Lab }) => {
-        if (data.labs) this.labs = data.labs
-        if (data.lab) this.lab = data.lab
+        if (data.labs) this.labs = data.labs;
+        if (data.lab) this.lab = data.lab;
       });
   }
 }

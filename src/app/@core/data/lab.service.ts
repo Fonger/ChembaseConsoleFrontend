@@ -13,42 +13,42 @@ export class LabService {
   private labSubject = new ReplaySubject<Lab>(1);
 
   getLabs(): Observable<Partial<Lab>[]> {
-    return this.http.get<Partial<Lab>[]>(`${environment.apiBaseUri}/api/v1/admin/labs`)
+    return this.http.get<Partial<Lab>[]>(`${environment.apiBaseUri}/api/v1/admin/labs`);
   }
 
   getLab(labId: string): Observable<Lab> {
-    return this.http.get<Lab>(`${environment.apiBaseUri}/api/v1/admin/labs/${labId}`)
+    return this.http.get<Lab>(`${environment.apiBaseUri}/api/v1/admin/labs/${labId}`);
   }
 
   getCurrentLab(): Observable<Lab> {
-    return this.labSubject.asObservable()
+    return this.labSubject.asObservable();
   }
 
   setCurrentLab(lab: Lab) {
-    this.labSubject.next(lab)
+    this.labSubject.next(lab);
   }
 
   updateLab(labId: string, content: DeepPartial<Lab>): Observable<Lab> {
-    return this.http.patch<Lab>(`${environment.apiBaseUri}/api/v1/admin/labs/${labId}`, content)
+    return this.http.patch<Lab>(`${environment.apiBaseUri}/api/v1/admin/labs/${labId}`, content);
   }
 
   getLabStats(lab: Lab): Observable<LabStats> {
-    return this.http.get<LabStats>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/stats`)
+    return this.http.get<LabStats>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/stats`);
   }
 
   getLabUsers(lab: Lab): Observable<LabUser[]> {
-    return this.http.get<LabUser[]>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users`)
+    return this.http.get<LabUser[]>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users`);
   }
 
   createLabUser(lab: Lab, user: LabUser): Observable<LabUser> {
-    return this.http.post<LabUser>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users`, user)
+    return this.http.post<LabUser>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users`, user);
   }
 
   updateLabUser(lab: Lab, user: Partial<LabUser>): Observable<LabUser> {
-    return this.http.patch<LabUser>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users/${user._id}`, user)
+    return this.http.patch<LabUser>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users/${user._id}`, user);
   }
 
   deleteLabUser(lab: Lab, user: LabUser): Observable<Partial<LabUser>> {
-    return this.http.delete<Partial<LabUser>>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users/${user._id}`)
+    return this.http.delete<Partial<LabUser>>(`${environment.apiBaseUri}/api/v1/admin/labs/${lab.id}/users/${user._id}`);
   }
 }

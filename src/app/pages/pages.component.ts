@@ -15,8 +15,8 @@ import { Lab } from '../@core/data/lab';
   `,
 })
 export class NoLabComponent {
-  menu: NbMenuItem[] = DOCS_MENU_ITEMS
-  labs?: Partial<Lab>[]
+  menu: NbMenuItem[] = DOCS_MENU_ITEMS;
+  labs?: Partial<Lab>[];
 }
 
 @Component({
@@ -29,16 +29,16 @@ export class NoLabComponent {
   `,
 })
 export class PagesComponent implements OnInit {
-  menu: NbMenuItem[]
-  labs?: Partial<Lab>[]
-  beakerMenu: NbMenuItem
+  menu: NbMenuItem[];
+  labs?: Partial<Lab>[];
+  beakerMenu: NbMenuItem;
 
   constructor(private labService: LabService) {
     this.beakerMenu = {
       title: 'Beakers',
       icon: 'ion-beaker',
       children: [],
-    }
+    };
   }
 
   ngOnInit() {
@@ -83,14 +83,14 @@ export class PagesComponent implements OnInit {
               link: `/labs/${lab.id}/beakers/${beaker.id}/config`,
             },
           ],
-        }
+        };
       });
       this.beakerMenu.children.push({
         title: 'Create Beaker',
         link: 'createbeaker',
       });
-      this.menu[3].hidden = false
-      this.menu[4].hidden = false
+      this.menu[3].hidden = false;
+      this.menu[4].hidden = false;
     });
   }
 }

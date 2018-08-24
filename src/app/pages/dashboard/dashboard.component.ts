@@ -53,76 +53,76 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
     },
   };
-  allowOrigins: { origin: string }[] = []
-  SDK_USAGE: string
+  allowOrigins: { origin: string }[] = [];
+  SDK_USAGE: string;
   value = 0;
   ngOnInit() {
     this.subscription = this.labService.getCurrentLab().subscribe(lab => {
-      this.lab = lab
-      this.allowOrigins = lab.allowOrigins.map(origin => ({ origin }))
+      this.lab = lab;
+      this.allowOrigins = lab.allowOrigins.map(origin => ({ origin }));
       this.labService.getLabStats(lab).subscribe(stats => {
-        this.labStats = stats
-        this.setupChart(Math.round(this.labStats.fsUsedSize / this.labStats.fsTotalSize * 100), 'fsOption')
-        this.setupChart(Math.round(this.labStats.storageSize / this.labStats.quotaSize * 100), 'quotaOption')
-      })
+        this.labStats = stats;
+        this.setupChart(Math.round(this.labStats.fsUsedSize / this.labStats.fsTotalSize * 100), 'fsOption');
+        this.setupChart(Math.round(this.labStats.storageSize / this.labStats.quotaSize * 100), 'quotaOption');
+      });
       this.SDK_USAGE = '<script src="chembase-sdk-v0.0.1"></script>\n'
         + '<script>\n'
         + `var lab = Chembase.Lab('${lab.id}')\n`
-        + `</script>\n`
+        + `</script>\n`;
     });
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe()
-    this.themeSubscription.unsubscribe()
+    this.subscription.unsubscribe();
+    this.themeSubscription.unsubscribe();
   }
 
   editLabName() {
-    this.newName = this.lab.name
+    this.newName = this.lab.name;
   }
   saveLabName() {
     this.labService.updateLab(this.lab.id, {
       name: this.newName,
     }).subscribe(lab => {
-      this.labService.setCurrentLab(lab)
+      this.labService.setCurrentLab(lab);
     }, error => {
-      console.error(error)
+      console.error(error);
     }, () => {
-      this.newName = null
-    })
+      this.newName = null;
+    });
   }
 
   onCreateOrigin($event) {
-    this.updateAllOrigin($event, OriginOperation.Create)
+    this.updateAllOrigin($event, OriginOperation.Create);
   }
   onEditOrigin($event) {
-    this.updateAllOrigin($event, OriginOperation.Edit)
+    this.updateAllOrigin($event, OriginOperation.Edit);
   }
   onDeleteOrigin($event) {
-    this.updateAllOrigin($event, OriginOperation.Delete)
+    this.updateAllOrigin($event, OriginOperation.Delete);
   }
   async updateAllOrigin($event, operation: OriginOperation) {
-    const newAllowOrigins: string[] = $event.source.data.map(o => o.origin)
+    const newAllowOrigins: string[] = $event.source.data.map(o => o.origin);
 
     if (operation === OriginOperation.Create) {
-      newAllowOrigins.unshift($event.newData.origin)
+      newAllowOrigins.unshift($event.newData.origin);
     } else {
-      const index = newAllowOrigins.findIndex(o => o === $event.data.origin)
+      const index = newAllowOrigins.findIndex(o => o === $event.data.origin);
       if (operation === OriginOperation.Delete) {
-        newAllowOrigins.splice(index, 1)
+        newAllowOrigins.splice(index, 1);
       } else if (operation === OriginOperation.Edit) {
-        newAllowOrigins[index] = $event.newData.origin
+        newAllowOrigins[index] = $event.newData.origin;
       }
     }
 
     this.labService.updateLab(this.lab.id, {
       allowOrigins: newAllowOrigins,
     }).subscribe(lab => {
-      $event.confirm.resolve()
-      this.labService.setCurrentLab(lab)
+      $event.confirm.resolve();
+      this.labService.setCurrentLab(lab);
     }, error => {
-      console.error(error)
-      $event.confirm.reject()
-    })
+      console.error(error);
+      $event.confirm.reject();
+    });
   }
 
   setupChart(percent: number, target: 'fsOption' | 'quotaOption') {
@@ -258,10 +258,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           },
         ],
       });
-    }))
+    }));
   }
 
   openModal(modal) {
-    this.modalService.open(modal)
+    this.modalService.open(modal);
   }
 }

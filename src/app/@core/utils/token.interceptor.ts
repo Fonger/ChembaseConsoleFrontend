@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private token?: String
+  private token?: String;
   constructor(private authService: NbAuthService) {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {

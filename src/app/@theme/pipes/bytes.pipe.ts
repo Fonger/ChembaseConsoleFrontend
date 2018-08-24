@@ -5,6 +5,6 @@ import * as bytes from 'bytes';
 export class BytesPipe implements PipeTransform {
 
   transform(input: number): number {
-    return bytes(input, { unitSeparator: ' ' })
+    return bytes(input, { unitSeparator: ' ' });
   }
 }

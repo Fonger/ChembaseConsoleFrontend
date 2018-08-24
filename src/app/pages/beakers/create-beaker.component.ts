@@ -21,18 +21,18 @@ export class CreateBeakerComponent implements OnInit {
   lab: Lab;
 
   ngOnInit() {
-    this.lab = this.route.parent.snapshot.data.lab
+    this.lab = this.route.parent.snapshot.data.lab;
   }
 
   onSubmit(form: NgForm) {
     const beakerData = {
       id: form.value.beakerId,
       description: form.value.beakerDesc,
-    }
+    };
     this.beakerService.createBeaker(this.lab, beakerData).subscribe(beaker => {
-      this.router.navigate([`/labs/${this.lab.id}/beakers/${beaker.id}/data`])
-      this.lab.beakers.push(beaker)
-      this.labService.setCurrentLab(this.lab)
-    })
+      this.router.navigate([`/labs/${this.lab.id}/beakers/${beaker.id}/data`]);
+      this.lab.beakers.push(beaker);
+      this.labService.setCurrentLab(this.lab);
+    });
   }
 }

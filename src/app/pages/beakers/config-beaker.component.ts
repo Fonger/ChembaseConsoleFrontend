@@ -20,13 +20,13 @@ export class ConfigBeakerComponent implements OnInit {
     this.lab = this.route.parent.parent.snapshot.data.lab;
     this.route.data.subscribe(data => {
       this.beaker = data.beaker;
-    })
+    });
   }
   onSubmit(form: NgForm) {
     this.beakerService.updateBeaker(this.lab, this.beaker.id, { rule: form.value }).subscribe(newBeaker => {
       this.beaker = newBeaker;
     }, error => {
       console.error(error);
-    })
+    });
   }
 }

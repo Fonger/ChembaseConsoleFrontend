@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
       if (token.isValid()) {
         this.user = token.getPayload();
       }
-    })
+    });
   }
 
   ngOnInit() {
