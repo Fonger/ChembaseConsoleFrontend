@@ -39,7 +39,7 @@ export class BeakerComponent implements OnInit {
     const newKeys = Object.keys($event.result)
     const unsetKeys = oldKeys.filter(oldKey => !newKeys.includes(oldKey))
 
-    const { _id, __version, ...destObject } = $event.result;
+    const { _id, __version, __old, ...destObject } = $event.result;
     const update: any = { $set: destObject }
     if (unsetKeys.length > 0) {
       update.$unset = unsetKeys.reduce((unsetObj, key) => ({ ...unsetObj, [key]: 1 }), {})

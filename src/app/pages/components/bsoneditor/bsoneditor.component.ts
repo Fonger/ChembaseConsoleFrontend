@@ -46,10 +46,9 @@ export class BSONEditorComponent implements AfterViewInit, OnDestroy  {
       },
       onEditable: function (node) {
         if (node.path.length === 0) return false
-        if (node.path.length === 1 && node.field) {
-          if (node.field === '__version' || node.field === '_id') {
-            return false
-          }
+        const rootField = node.path[0]
+        if (rootField === '__version' || rootField === '_id' || rootField === '__old') {
+          return false
         }
         return true
       },
