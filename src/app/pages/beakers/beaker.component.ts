@@ -63,6 +63,10 @@ export class BeakerComponent implements OnInit {
       });
   }
   onCompoundRemove(compound) {
+    if (typeof compound._id === 'string' && compound._id.startsWith('NEW')) {
+      this.compounds = this.compounds.filter(c => c._id.toString() !== compound._id);
+      return
+    }
     this.compoundService
       .deleteCompound(this.lab, this.beaker, compound._id.toString())
       .subscribe(deletedCompound => {
