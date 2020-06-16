@@ -48,7 +48,7 @@
     "@nebular/theme": "^2.0.0-rc.10",
     "@ng-bootstrap/ng-bootstrap": "1.0.0",
     "@types/socket.io-client": "^1.4.32",
-    "bootstrap": "4.0.0",
+    "bootstrap": "4.3.1",
     "bson": "^3.0.2",
     "bsoneditor": "github:Fonger/bsoneditor",
     "buffer": "^5.1.0",
